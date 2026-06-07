@@ -146,11 +146,13 @@ function Header() {
   );
 }
 
-function Logo() {
+function Logo({ className = "h-9 w-auto" }: { className?: string }) {
   return (
-    <div className="w-9 h-9 rounded-lg bg-gradient-primary grid place-items-center shadow-card-soft">
-      <Droplets className="w-5 h-5 text-primary-foreground" />
-    </div>
+    <img
+      src={logoAsset.url}
+      alt="טייאר טכנולוגיות צנרת"
+      className={className}
+    />
   );
 }
 
