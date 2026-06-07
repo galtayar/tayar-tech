@@ -16,14 +16,17 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import heroImage from "@/assets/hero-pipes.jpg";
+import logoAsset from "@/assets/tayar-tech-logo.png.asset.json";
 
-// TODO: החליפו במספרים האמיתיים של החברה
-const PHONE = "050-0000000";
-const PHONE_TEL = "+972500000000";
-const WHATSAPP = "972500000000";
+const PHONE = "052-5718085";
+const PHONE_TEL = "+972525718085";
+const WHATSAPP = "972525718085";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
   "שלום, אשמח לקבל הצעת מחיר לטיפול בצנרת",
 )}`;
+const GOOGLE_BUSINESS_NAME = "טייאר אינסטלציה ושירותי ביובית";
+const GOOGLE_REVIEWS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(GOOGLE_BUSINESS_NAME)}`;
+const GOOGLE_WRITE_REVIEW_URL = `https://www.google.com/search?q=${encodeURIComponent(GOOGLE_BUSINESS_NAME)}#lrd=`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
