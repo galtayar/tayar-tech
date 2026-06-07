@@ -77,19 +77,44 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "טייאר טכנולוגיות צנרת — תיקון ושיקום צנרת ללא הרס" },
+      {
+        name: "description",
+        content:
+          "טייאר טכנולוגיות צנרת — פתרונות מתקדמים לתיקון ושיקום צנרת ללא הרס, איתור נזילות וצילום קווי ביוב לבתים פרטיים, בניינים וועדי בתים.",
+      },
+      { name: "author", content: "Tayar Tech" },
+      { property: "og:title", content: "טייאר טכנולוגיות צנרת — תיקון ללא הרס" },
+      {
+        property: "og:description",
+        content:
+          "פתרונות מתקדמים לצנרת באמצעות טכנולוגיה חדשנית וללא עבודות הרס מיותרות.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:locale", content: "he_IL" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=Rubik:wght@500;600;700;800&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "טייאר טכנולוגיות צנרת",
+          alternateName: "Tayar Tech",
+          description:
+            "תיקון ושיקום צנרת ללא הרס, איתור נזילות וצילום קווי ביוב",
+          areaServed: "IL",
+        }),
       },
     ],
   }),
@@ -101,13 +126,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="he" dir="rtl">
       <head>
         <HeadContent />
       </head>
       <body>
         {children}
         <Scripts />
+
       </body>
     </html>
   );
