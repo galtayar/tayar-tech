@@ -26,7 +26,7 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
 )}`;
 const GOOGLE_BUSINESS_NAME = "טייאר אינסטלציה ושירותי ביובית";
 const GOOGLE_REVIEWS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(GOOGLE_BUSINESS_NAME)}`;
-const GOOGLE_WRITE_REVIEW_URL = `https://www.google.com/search?q=${encodeURIComponent(GOOGLE_BUSINESS_NAME)}#lrd=`;
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
