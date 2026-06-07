@@ -84,10 +84,13 @@ function Header() {
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border">
       <div className="container-section flex items-center justify-between h-16">
         <a href="#top" className="flex items-center gap-2">
-          <Logo />
-          <span className="font-display font-bold text-lg leading-tight">
-            טייאר<span className="text-primary"> טכנולוגיות צנרת</span>
-          </span>
+          <img
+            src={logoAsset.url}
+            alt="טייאר טכנולוגיות צנרת — לוגו"
+            className="h-10 w-auto"
+            width={120}
+            height={40}
+          />
         </a>
         <nav className="hidden lg:flex items-center gap-7">
           {links.map((l) => (
