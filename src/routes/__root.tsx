@@ -77,21 +77,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "טייאר טכנולוגיות צנרת — תיקון ושיקום צנרת ללא הרס" },
+      { title: "TAYAR TECH | שיקום צנרת ללא הרס, תיקון פאץ׳ וצילום קווי ביוב" },
       {
         name: "description",
         content:
-          "טייאר טכנולוגיות צנרת — פתרונות מתקדמים לתיקון ושיקום צנרת ללא הרס, איתור נזילות וצילום קווי ביוב לבתים פרטיים, בניינים וועדי בתים.",
+          "TAYAR TECH — טכנולוגיות צנרת מתקדמות. שיקום ותיקון צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול, צילום ושטיפת קווי ביוב. מעל 12 שנות ניסיון.",
       },
-      { name: "author", content: "Tayar Tech" },
-      { property: "og:title", content: "טייאר טכנולוגיות צנרת — תיקון ללא הרס" },
+      { name: "author", content: "TAYAR TECH" },
+      { property: "og:title", content: "TAYAR TECH | טכנולוגיות צנרת מתקדמות" },
       {
         property: "og:description",
         content:
-          "פתרונות מתקדמים לצנרת באמצעות טכנולוגיה חדשנית וללא עבודות הרס מיותרות.",
+          "שיקום ותיקון צנרת ללא הרס — פאץ׳, שרוול וצילום קווי ביוב. מעל 12 שנות ניסיון.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "he_IL" },
+      { property: "og:site_name", content: "TAYAR TECH" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -109,15 +110,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          name: "טייאר טכנולוגיות צנרת",
-          alternateName: "Tayar Tech",
+          name: "TAYAR TECH — טייאר טכנולוגיות צנרת",
+          alternateName: "טייאר טכנולוגיות צנרת",
           description:
-            "תיקון ושיקום צנרת ללא הרס, איתור נזילות וצילום קווי ביוב",
-          areaServed: "IL",
+            "שיקום ותיקון צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול וצילום קווי ביוב — מעל 12 שנות ניסיון.",
+          telephone: "+972525718085",
+          areaServed: [
+            "קריית אונו","גני תקווה","פתח תקווה","גבעת שמואל","יהוד",
+            "אור יהודה","סביון","רמת גן","תל אביב","בקעת אונו","אזור המרכז",
+          ],
+          address: { "@type": "PostalAddress", addressCountry: "IL", addressRegion: "מרכז" },
+          founder: { "@type": "Person", name: "גל טייאר" },
+          knowsAbout: [
+            "שיקום צנרת ללא הרס","תיקון פאץ׳","שיטת שרוול CIPP",
+            "צילום קווי ביוב","שטיפת קווי ביוב","שיקום מערכות ביוב",
+          ],
+          aggregateRating: { "@type": "AggregateRating", ratingValue: "5", reviewCount: "20" },
         }),
       },
     ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
