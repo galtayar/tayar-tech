@@ -115,15 +115,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           description:
             "שיקום ותיקון צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול וצילום קווי ביוב — מעל 12 שנות ניסיון.",
           telephone: "+972525718085",
+          sameAs: ["https://www.facebook.com/tayargal/"],
           areaServed: [
             "קריית אונו","גני תקווה","פתח תקווה","גבעת שמואל","יהוד",
-            "אור יהודה","סביון","רמת גן","תל אביב","בקעת אונו","אזור המרכז",
+            "אור יהודה","סביון","רמת גן","תל אביב","ראשון לציון","חולון","בת ים","בקעת אונו","אזור המרכז",
           ],
           address: { "@type": "PostalAddress", addressCountry: "IL", addressRegion: "מרכז" },
           founder: { "@type": "Person", name: "גל טייאר" },
           knowsAbout: [
-            "שיקום צנרת ללא הרס","תיקון פאץ׳","שיטת שרוול CIPP",
-            "צילום קווי ביוב","שטיפת קווי ביוב","שיקום מערכות ביוב",
+            "שיקום צנרת ללא הרס","תיקון צנרת ללא חפירה","תיקון פאץ׳","שיטת שרוול CIPP",
+            "צילום קווי ביוב","שטיפת קווי ביוב","שיקום מערכות ביוב","חידוש צנרת",
           ],
           aggregateRating: { "@type": "AggregateRating", ratingValue: "5", reviewCount: "20" },
         }),

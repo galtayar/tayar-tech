@@ -8,7 +8,6 @@ import {
   Camera,
   Droplets,
   Sparkles,
-  Clock,
   Award,
   CheckCircle2,
   Quote,
@@ -20,6 +19,7 @@ import {
   Waves,
   Cpu,
   Gauge,
+  Facebook,
 } from "lucide-react";
 import { useState } from "react";
 import {
@@ -30,6 +30,13 @@ import {
 } from "@/components/ui/accordion";
 import heroImage from "@/assets/hero-pipe-cutaway.jpg";
 import logoAsset from "@/assets/tayar-tech-logo.png.asset.json";
+import galProfile from "@/assets/gal-profile.jpg.asset.json";
+import logoGaneiTikva from "@/assets/clients/ganei-tikva.png.asset.json";
+import logoKiryatOno from "@/assets/clients/kiryat-ono.png.asset.json";
+import logoNesher from "@/assets/clients/nesher.png.asset.json";
+import logoYakir from "@/assets/clients/yakir.png.asset.json";
+import logoMeatbar from "@/assets/clients/meatbar.jpg.asset.json";
+import logoOved from "@/assets/clients/oved.png.asset.json";
 
 const PHONE = "052-5718085";
 const PHONE_TEL = "+972525718085";
@@ -39,6 +46,19 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
 )}`;
 const GOOGLE_BUSINESS_NAME = "טייאר אינסטלציה ושירותי ביובית";
 const GOOGLE_REVIEWS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(GOOGLE_BUSINESS_NAME)}`;
+const FACEBOOK_URL = "https://www.facebook.com/tayargal/";
+
+// Click tracking — sends to gtag/dataLayer when Google Analytics/Ads is wired up.
+function trackConversion(action: "call" | "whatsapp", location: string) {
+  if (typeof window === "undefined") return;
+  const w = window as unknown as {
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+  };
+  const payload = { event_category: "engagement", event_label: location, action };
+  w.gtag?.("event", action === "call" ? "phone_call" : "whatsapp_click", payload);
+  w.dataLayer?.push({ event: action === "call" ? "phone_call" : "whatsapp_click", ...payload });
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -52,7 +72,11 @@ export const Route = createFileRoute("/")({
         content:
           "TAYAR TECH — טכנולוגיות צנרת מתקדמות. שיקום צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול, צילום ושטיפת קווי ביוב. מעל 12 שנות ניסיון, מוסמכי STS. שירות לפרטיים, ועדי בתים, חברות ניהול ורשויות.",
       },
-      { name: "keywords", content: "שיקום צנרת ללא הרס, תיקון צנרת ללא חפירה, תיקון פאץ׳, שיקום צנרת בשיטת שרוול, צילום קווי ביוב, שטיפת קווי ביוב, שיקום מערכות ביוב, טכנולוגיות צנרת מתקדמות, CIPP, טייאר טכנולוגיות צנרת" },
+      {
+        name: "keywords",
+        content:
+          "שיקום צנרת ללא הרס, תיקון צנרת ללא הרס, תיקון צנרת בלי לשבור, תיקון צנרת ללא חפירה, תיקון פאץ׳, שיקום צנרת בשיטת שרוול, צילום קווי ביוב, שטיפת קווי ביוב, חידוש צנרת, שיקום מערכות ביוב, פתרונות מתקדמים לתשתיות מים וביוב, CIPP, טייאר טכנולוגיות צנרת",
+      },
       { property: "og:title", content: "TAYAR TECH | טכנולוגיות צנרת מתקדמות" },
       {
         property: "og:description",
@@ -73,6 +97,7 @@ function HomePage() {
       <Header />
       <main>
         <Hero />
+        <Stats />
         <About />
         <WhyUs />
         <Services />
@@ -124,6 +149,7 @@ function Header() {
         </nav>
         <a
           href={`tel:${PHONE_TEL}`}
+          onClick={() => trackConversion("call", "header")}
           className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-semibold text-sm hover:bg-primary-glow transition-colors shadow-card-soft"
         >
           <Phone className="w-4 h-4" />
@@ -154,6 +180,7 @@ function Header() {
             ))}
             <a
               href={`tel:${PHONE_TEL}`}
+              onClick={() => trackConversion("call", "mobile_menu")}
               className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-2.5 rounded-lg font-semibold"
             >
               <Phone className="w-4 h-4" /> {PHONE}
@@ -169,42 +196,46 @@ function Header() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-gradient-hero">
-      {/* Large faded brand logo as background watermark */}
+      {/* Subtle geometric tech background */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 flex items-center justify-center"
-      >
-        <img
-          src={logoAsset.url}
-          alt=""
-          className="w-[min(900px,110%)] max-w-none opacity-[0.05] select-none"
-        />
-      </div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(37,99,235,0.10),transparent_55%)]" />
+        className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(var(--color-primary)_1px,transparent_1px),linear-gradient(90deg,var(--color-primary)_1px,transparent_1px)] [background-size:48px_48px]"
+      />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(37,99,235,0.12),transparent_55%)]" />
 
-      <div className="container-section relative grid lg:grid-cols-2 gap-12 items-center py-16 lg:py-24">
+      <div className="container-section relative grid lg:grid-cols-2 gap-12 items-center py-14 lg:py-20">
         <div className="relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-6">
             <Sparkles className="w-3.5 h-3.5" />
             TAYAR TECH | טכנולוגיות צנרת מתקדמות
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-5">
+
+          {/* Brand logo — prominent, not a watermark */}
+          <div className="relative mb-7 inline-block">
+            <div className="absolute inset-0 -m-4 bg-primary/20 blur-2xl rounded-full" aria-hidden />
+            <img
+              src={logoAsset.url}
+              alt="TAYAR TECH לוגו"
+              className="relative h-24 md:h-32 w-auto drop-shadow-[0_8px_30px_rgba(37,99,235,0.35)]"
+            />
+          </div>
+
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-4">
             שיקום ותיקון צנרת
             <br />
             <span className="text-gradient">ללא הרס</span>
           </h1>
-          <p className="text-lg text-muted-foreground mb-4 max-w-xl leading-relaxed">
-            מומחים לשיקום צנרת בטכנולוגיות מתקדמות עם מעל{" "}
-            <span className="font-bold text-foreground">12 שנות ניסיון</span>.
+          <p className="text-lg text-foreground/80 font-semibold mb-3 max-w-xl leading-relaxed">
+            פתרונות מתקדמים לשיקום וחידוש תשתיות מים וביוב
           </p>
           <p className="text-base text-muted-foreground mb-8 max-w-xl leading-relaxed">
-            צילום קווי ביוב, תיקוני פאץ׳, שיקום צנרת בשיטת שרוול ופתרונות
-            מתקדמים לתשתיות מים וביוב — עבור לקוחות פרטיים, חברות ניהול, עסקים
-            ורשויות מקומיות.
+            צילום קווי ביוב, חידוש צנרת ופתרונות מתקדמים לתשתיות מים וביוב —
+            לבתים פרטיים, בניינים, עסקים, חברות ניהול ורשויות מקומיות.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
               href={`tel:${PHONE_TEL}`}
+              onClick={() => trackConversion("call", "hero")}
               className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 rounded-xl font-bold shadow-elegant hover:bg-primary-glow transition-colors"
             >
               <Phone className="w-5 h-5" />
@@ -214,18 +245,15 @@ function Hero() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener"
+              onClick={() => trackConversion("whatsapp", "hero")}
               className="inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-6 py-3.5 rounded-xl font-bold shadow-card-soft hover:scale-[1.02] transition-transform"
             >
               <MessageCircle className="w-5 h-5" />
               WhatsApp
             </a>
           </div>
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-            {[
-              "12+ שנות ניסיון",
-              "מוסמכי STS",
-              "ללא חפירה. ללא הרס.",
-            ].map((t) => (
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+            {["12+ שנות ניסיון", "מוסמכי STS", "ללא חפירה. ללא הרס."].map((t) => (
               <div key={t} className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-success" />
                 {t}
@@ -248,19 +276,53 @@ function Hero() {
   );
 }
 
+/* ---------- Stats ---------- */
+function Stats() {
+  const stats = [
+    { value: "12+", label: "שנות ניסיון בתחום" },
+    { value: "STS", label: "מוסמכים לתיקון צנרת ללא הרס" },
+    { value: "360°", label: "צילום קווי ביוב מתקדם" },
+    { value: "B2B", label: "עבודה מול חברות ניהול ורשויות" },
+  ];
+  return (
+    <section className="relative -mt-2 z-10">
+      <div className="container-section">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5 bg-card border border-border rounded-3xl shadow-elegant p-5 lg:p-8">
+          {stats.map((s, i) => (
+            <div
+              key={s.label}
+              className={`text-center px-3 py-2 ${i !== 0 ? "lg:border-r lg:border-border" : ""}`}
+            >
+              <div className="text-3xl lg:text-4xl font-extrabold text-gradient leading-none mb-2">
+                {s.value}
+              </div>
+              <div className="text-xs lg:text-sm text-muted-foreground font-semibold leading-snug">
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- About ---------- */
 function About() {
   return (
     <section id="about" className="py-20 lg:py-28 bg-gradient-soft">
       <div className="container-section grid lg:grid-cols-5 gap-12 items-center">
         <div className="lg:col-span-2 relative">
-          <div className="aspect-square rounded-3xl bg-gradient-primary shadow-elegant grid place-items-center p-10 relative overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.25),transparent_60%)]" />
+          <div className="relative rounded-3xl overflow-hidden shadow-elegant border border-border">
             <img
-              src={logoAsset.url}
-              alt="TAYAR TECH"
-              className="relative w-3/4 brightness-0 invert opacity-95"
+              src={galProfile.url}
+              alt="גל טייאר — מייסד TAYAR TECH"
+              className="w-full h-full object-cover aspect-[4/5]"
             />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/85 to-transparent p-5 pt-16 text-primary-foreground">
+              <div className="font-display font-extrabold text-xl">גל טייאר</div>
+              <div className="text-sm opacity-90">מייסד ומנכ״ל TAYAR TECH</div>
+            </div>
           </div>
           <div className="absolute -bottom-5 -left-5 bg-card border border-border rounded-2xl shadow-card-soft px-5 py-4">
             <div className="text-3xl font-extrabold text-gradient">12+</div>
@@ -275,15 +337,14 @@ function About() {
           <p className="text-muted-foreground leading-relaxed mb-5">
             TAYAR TECH הוקמה מתוך מומחיות מקצועית של מעל 12 שנים בתחום
             האינסטלציה ושיקום הצנרת. בראש החברה עומד{" "}
-            <span className="font-bold text-foreground">גל טייאר</span> — בעל
-            הסמכה לתכנון מערכות אינסטלציה והסמכה לביצוע תיקוני צנרת ללא הרס
-            מטעם <span className="font-bold text-foreground">STS</span>.
+            <span className="font-bold text-foreground">גל טייאר</span> — מוסמך
+            לתכנון מערכות אינסטלציה ומוסמך לביצוע תיקוני צנרת ללא הרס מטעם{" "}
+            <span className="font-bold text-foreground">STS</span>.
           </p>
           <p className="text-muted-foreground leading-relaxed mb-7">
-            אנחנו מתמחים בטכנולוגיות הצנרת המתקדמות בעולם —{" "}
-            <span className="font-semibold text-foreground">מצלמות 360°</span>,
-            תיקוני פאץ׳ ושיקום צנרת בשיטת שרוול (CIPP) — עבור לקוחות פרטיים,
-            ועדי בתים, חברות ניהול, מוסדות ציבוריים ורשויות מקומיות.
+            החברה מתמחה ב<span className="font-semibold text-foreground">צילום קווי ביוב</span>,
+            תיקוני פאץ׳, שיקום צנרת ופתרונות מתקדמים לתשתיות מים וביוב — עבור
+            לקוחות פרטיים, בניינים משותפים, חברות ניהול, עסקים ורשויות מקומיות.
           </p>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
@@ -333,15 +394,13 @@ function WhyUs() {
           {items.map((it) => (
             <div
               key={it.title}
-              className="group bg-card border border-border rounded-2xl p-6 hover:shadow-card-soft hover:-translate-y-1 transition-all"
+              className="group bg-card border border-border rounded-2xl p-6 hover:shadow-elegant hover:-translate-y-1 transition-all"
             >
               <div className="w-12 h-12 rounded-xl bg-gradient-primary grid place-items-center mb-4 shadow-card-soft group-hover:shadow-glow transition-shadow">
                 <it.icon className="w-6 h-6 text-primary-foreground" />
               </div>
               <h3 className="font-bold text-lg mb-2">{it.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {it.text}
-              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{it.text}</p>
             </div>
           ))}
         </div>
@@ -359,8 +418,9 @@ function Services() {
     { icon: Layers, title: "שיקום בשיטת שרוול (CIPP)", text: "שרוול אפוקסי פנימי שיוצר ׳צינור בתוך צינור׳ עמיד לעשרות שנים." },
     { icon: Camera, title: "צילום קווי ביוב", text: "מצלמות רובוטיות ו-360° לאיתור סתימות, שברים, שורשים ומפגעים." },
     { icon: Waves, title: "שטיפת קווי ביוב", text: "שטיפה בלחץ גבוה (ג׳טינג) להסרת שומנים, אבנית וסתימות עיקשות." },
-    { icon: Droplets, title: "שיקום מערכות ביוב", text: "פרויקטים מקיפים לבניינים, מוסדות ורשויות — מתכנון ועד מסירה." },
-    { icon: Cpu, title: "פתרונות מתקדמים לתשתיות", text: "ייעוץ הנדסי ופתרונות מותאמים לתשתיות מים וביוב מורכבות." },
+    { icon: Building2, title: "פתרונות לבניינים משותפים", text: "שיקום צנרת לבניינים וועדי בתים — ביצוע מסודר עם תיאום מלא מול הדיירים." },
+    { icon: Droplets, title: "פתרונות לחברות ניהול", text: "הסכמי שירות, אחזקה תקופתית ופרויקטים מקיפים לחברות ניהול נכסים." },
+    { icon: Cpu, title: "פתרונות לרשויות מקומיות", text: "שיקום תשתיות מים וביוב לעיריות ומועצות — בסטנדרט הנדסי גבוה." },
   ];
   return (
     <section id="services" className="py-20 lg:py-28 bg-gradient-soft">
@@ -370,7 +430,7 @@ function Services() {
           title="פתרון טכנולוגי לכל תקלת צנרת"
           subtitle="טכנולוגיה מתקדמת, ביצוע מקצועי וניסיון מוכח — לבתים פרטיים, בניינים, חברות ניהול ורשויות."
         />
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mt-14">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
           {services.map((s) => (
             <article
               key={s.title}
@@ -382,9 +442,7 @@ function Services() {
                   <s.icon className="w-6 h-6" />
                 </div>
                 <h3 className="font-bold text-lg mb-2 leading-snug">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {s.text}
-                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.text}</p>
               </div>
             </article>
           ))}
@@ -392,6 +450,7 @@ function Services() {
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href={`tel:${PHONE_TEL}`}
+            onClick={() => trackConversion("call", "services")}
             className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-xl font-bold hover:bg-primary-glow transition-colors"
           >
             <Phone className="w-4 h-4" /> ייעוץ מקצועי — {PHONE}
@@ -400,6 +459,7 @@ function Services() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener"
+            onClick={() => trackConversion("whatsapp", "services")}
             className="inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-6 py-3 rounded-xl font-bold hover:scale-[1.02] transition-transform"
           >
             <MessageCircle className="w-4 h-4" /> שלחו הודעה בוואטסאפ
@@ -413,12 +473,12 @@ function Services() {
 /* ---------- Clients ---------- */
 function Clients() {
   const clients = [
-    "עיריית גני תקווה",
-    "עיריית קריית אונו",
-    "נשר ניהול",
-    "יקיר ניהול — בית הדובדבן",
-    "מסעדת מיטבר",
-    "מסעדת עובד בכפר",
+    { name: "עיריית גני תקווה", logo: logoGaneiTikva.url },
+    { name: "עיריית קריית אונו", logo: logoKiryatOno.url },
+    { name: "נשר ניהול", logo: logoNesher.url },
+    { name: "יקיר ב. ייעוץ וניהול", logo: logoYakir.url },
+    { name: "מסעדת מיטבר", logo: logoMeatbar.url },
+    { name: "מסעדת עובד בכפר", logo: logoOved.url },
   ];
   return (
     <section id="clients" className="py-20 lg:py-28">
@@ -426,17 +486,21 @@ function Clients() {
         <SectionHead
           eyebrow="בין לקוחותינו"
           title="חברות, מוסדות ורשויות שסומכים עלינו"
-          subtitle="אנו גאים לעבוד עם רשויות מקומיות, חברות ניהול ועסקים מובילים."
+          subtitle="לקוחותינו כוללים רשויות מקומיות, חברות ניהול, עסקים ומוסדות מובילים באזור המרכז."
         />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-12">
-          {clients.map((name) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-6 mt-12">
+          {clients.map((c) => (
             <div
-              key={name}
-              className="aspect-[5/3] bg-card border border-border rounded-2xl shadow-card-soft grid place-items-center px-3 py-4 text-center hover:border-primary/40 hover:shadow-elegant transition-all"
+              key={c.name}
+              title={c.name}
+              className="aspect-[4/3] bg-card border border-border rounded-2xl shadow-card-soft grid place-items-center p-5 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 hover:border-primary/40 hover:shadow-elegant transition-all"
             >
-              <span className="font-display font-bold text-sm md:text-base text-foreground leading-tight">
-                {name}
-              </span>
+              <img
+                src={c.logo}
+                alt={c.name}
+                className="max-h-full max-w-full object-contain"
+                loading="lazy"
+              />
             </div>
           ))}
         </div>
@@ -472,7 +536,16 @@ function Testimonials() {
           title="מה הלקוחות שלנו אומרים"
           subtitle="עשרות לקוחות פרטיים, ועדי בתים, מוסדות ורשויות סומכים עלינו לאורך השנים."
         />
-        <div className="grid md:grid-cols-3 gap-6 mt-14">
+        <div className="flex items-center justify-center gap-2 mt-6 mb-2">
+          <div className="flex gap-0.5">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-yellow-400 stroke-yellow-400" />
+            ))}
+          </div>
+          <span className="font-bold text-foreground">5.0</span>
+          <span className="text-sm text-muted-foreground">דירוג Google</span>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6 mt-10">
           {items.map((t) => (
             <figure
               key={t.name}
@@ -536,6 +609,9 @@ function ServiceAreas() {
     "סביון",
     "רמת גן",
     "תל אביב",
+    "ראשון לציון",
+    "חולון",
+    "בת ים",
     "בקעת אונו",
     "אזור המרכז",
   ];
@@ -566,34 +642,15 @@ function ServiceAreas() {
 /* ---------- FAQ ---------- */
 function FAQ() {
   const faqs = [
-    {
-      q: "מהו שיקום צנרת ללא הרס?",
-      a: "שיקום צנרת ללא הרס הוא פתרון טכנולוגי מתקדם המאפשר להחזיר צנרת ישנה ופגומה למצב חדש — מבלי לשבור קירות, רצפות או חפירות בחצר. השיקום מתבצע מתוך הצנרת באמצעות שיטות פאץ׳ או שרוול (CIPP).",
-    },
-    {
-      q: "מהו תיקון פאץ׳?",
-      a: "תיקון פאץ׳ הוא טיפול נקודתי בקטע פגום בצנרת — סדק, חור או חיבור דולף. מותקנת ׳טבעת׳ אפוקסי פנימית באורך של עד מטר אשר אוטמת לחלוטין את הקטע הפגום ומחזירה את הצנרת לשימוש מלא.",
-    },
-    {
-      q: "מהו שיקום צנרת בשיטת שרוול (CIPP)?",
-      a: "שיטת השרוול (Cured In Place Pipe) יוצרת ׳צינור בתוך צינור׳: שרוול רך ספוג ברזין אפוקסי מוחדר לתוך הקו הקיים ומתקשה למצב מוצק לאחר חימום. התוצאה — קו חדש לחלוטין, חלק, עמיד וללא תפרים, לעשרות שנים.",
-    },
-    {
-      q: "האם חייבים לחפור או לשבור קירות?",
-      a: "לא. זהו בדיוק היתרון של הטכנולוגיה. כל העבודה מתבצעת דרך פתחי גישה קיימים — ללא חפירות, ללא שבירת קירות ורצפות וללא נזק להחזרת המצב לקדמותו.",
-    },
-    {
-      q: "כמה זמן נמשך התהליך?",
-      a: "רוב תיקוני הפאץ׳ מתבצעים תוך מספר שעות באותו היום. שיקום מלא בשיטת שרוול לבניין אורך בדרך כלל בין יום אחד לכמה ימי עבודה — תלוי באורך ובמורכבות הקו.",
-    },
-    {
-      q: "מתי מומלץ לבצע צילום קווי ביוב?",
-      a: "מומלץ לבצע צילום קווי ביוב לפני רכישת נכס, לאחר סתימות חוזרות, כשמופיעות נזילות לא מוסברות, או כתחזוקה תקופתית למבני מגורים, ועדי בתים, מוסדות ועסקים.",
-    },
-    {
-      q: "מהם היתרונות של שיקום צנרת ללא הרס?",
-      a: "אפס שבירות והרס, חיסכון משמעותי בעלויות שיפוץ, ביצוע מהיר, פתרון עמיד לעשרות שנים, צמצום מטרדי לכלוך ורעש, ופתרון ידידותי לסביבה.",
-    },
+    { q: "מהו שיקום צנרת ללא הרס?", a: "שיקום צנרת ללא הרס הוא פתרון טכנולוגי מתקדם המאפשר להחזיר צנרת ישנה ופגומה למצב חדש — מבלי לשבור קירות, רצפות או חפירות בחצר. השיקום מתבצע מתוך הצנרת באמצעות שיטות פאץ׳ או שרוול (CIPP)." },
+    { q: "מהו תיקון פאץ׳?", a: "תיקון פאץ׳ הוא טיפול נקודתי בקטע פגום בצנרת — סדק, חור או חיבור דולף. מותקנת ׳טבעת׳ אפוקסי פנימית באורך של עד מטר אשר אוטמת לחלוטין את הקטע הפגום ומחזירה את הצנרת לשימוש מלא." },
+    { q: "מהו שיקום צנרת בשיטת שרוול (CIPP)?", a: "שיטת השרוול (Cured In Place Pipe) יוצרת ׳צינור בתוך צינור׳: שרוול רך ספוג ברזין אפוקסי מוחדר לתוך הקו הקיים ומתקשה למצב מוצק לאחר חימום. התוצאה — קו חדש לחלוטין, חלק, עמיד וללא תפרים, לעשרות שנים." },
+    { q: "האם חייבים לחפור או לשבור קירות?", a: "לא. זהו בדיוק היתרון של הטכנולוגיה. כל העבודה מתבצעת דרך פתחי גישה קיימים — ללא חפירות, ללא שבירת קירות ורצפות וללא נזק להחזרת המצב לקדמותו." },
+    { q: "כמה זמן נמשך התהליך?", a: "רוב תיקוני הפאץ׳ מתבצעים תוך מספר שעות באותו היום. שיקום מלא בשיטת שרוול לבניין אורך בדרך כלל בין יום אחד לכמה ימי עבודה — תלוי באורך ובמורכבות הקו." },
+    { q: "מתי מומלץ לבצע צילום קווי ביוב?", a: "מומלץ לבצע צילום קווי ביוב לפני רכישת נכס, לאחר סתימות חוזרות, כשמופיעות נזילות לא מוסברות, או כתחזוקה תקופתית למבני מגורים, ועדי בתים, מוסדות ועסקים." },
+    { q: "האם אתם עובדים עם ועדי בתים?", a: "בהחלט. אנו מבצעים שיקום צנרת וקווי ביוב לבניינים משותפים, כולל תיאום מסודר מול ועד הבית, הצעת מחיר מפורטת לאסיפת דיירים וביצוע מקצועי עם מינימום הפרעה ליום־יום." },
+    { q: "האם אתם עובדים עם חברות ניהול?", a: "כן. TAYAR TECH פועלת עם חברות ניהול נכסים מובילות — באחזקה תקופתית, בפרויקטים מתוכננים ובמתן מענה מהיר לקריאות שירות דחופות." },
+    { q: "האם אתם עובדים עם עיריות ורשויות מקומיות?", a: "כן. אנו ספקים מאושרים לרשויות מקומיות ועיריות, ובעלי ניסיון בביצוע פרויקטים תשתיתיים לשיקום מערכות מים וביוב בסטנדרט הנדסי גבוה." },
   ];
   return (
     <section id="faq" className="py-20 lg:py-28 bg-gradient-soft">
@@ -636,6 +693,7 @@ function CTA() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href={`tel:${PHONE_TEL}`}
+                onClick={() => trackConversion("call", "cta")}
                 className="inline-flex items-center justify-center gap-2 bg-white text-primary px-6 py-3.5 rounded-xl font-bold hover:bg-white/90 transition-colors"
               >
                 <Phone className="w-5 h-5" />
@@ -645,6 +703,7 @@ function CTA() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener"
+                onClick={() => trackConversion("whatsapp", "cta")}
                 className="inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-6 py-3.5 rounded-xl font-bold hover:scale-[1.02] transition-transform"
               >
                 <MessageCircle className="w-5 h-5" />
@@ -664,17 +723,31 @@ function Footer() {
     <footer className="border-t border-border bg-card">
       <div className="container-section py-12 grid md:grid-cols-3 gap-8 text-sm">
         <div>
-          <img src={logoAsset.url} alt="TAYAR TECH" className="h-10 w-auto mb-4" />
-          <p className="text-muted-foreground leading-relaxed">
+          <img src={logoAsset.url} alt="TAYAR TECH" className="h-12 w-auto mb-4" />
+          <p className="text-muted-foreground leading-relaxed mb-4">
             TAYAR TECH — טכנולוגיות צנרת מתקדמות. שיקום ותיקון צנרת ללא הרס,
             תיקוני פאץ׳, שיטת שרוול וצילום קווי ביוב.
           </p>
+          <a
+            href={FACEBOOK_URL}
+            target="_blank"
+            rel="noopener"
+            aria-label="עמוד הפייסבוק שלנו"
+            className="inline-flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+          >
+            <Facebook className="w-4 h-4 fill-current" />
+            עקבו אחרינו בפייסבוק
+          </a>
         </div>
         <div>
           <h3 className="font-bold mb-3">צור קשר</h3>
           <ul className="space-y-2 text-muted-foreground">
             <li>
-              <a href={`tel:${PHONE_TEL}`} className="hover:text-primary">
+              <a
+                href={`tel:${PHONE_TEL}`}
+                onClick={() => trackConversion("call", "footer")}
+                className="hover:text-primary"
+              >
                 <Phone className="inline w-4 h-4 ml-1" /> {PHONE}
               </a>
             </li>
@@ -683,19 +756,20 @@ function Footer() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener"
+                onClick={() => trackConversion("whatsapp", "footer")}
                 className="hover:text-primary"
               >
                 <MessageCircle className="inline w-4 h-4 ml-1" /> WhatsApp
               </a>
             </li>
             <li>
-              <a
-                href={GOOGLE_REVIEWS_URL}
-                target="_blank"
-                rel="noopener"
-                className="hover:text-primary"
-              >
+              <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener" className="hover:text-primary">
                 ביקורות בגוגל ★
+              </a>
+            </li>
+            <li>
+              <a href={FACEBOOK_URL} target="_blank" rel="noopener" className="hover:text-primary">
+                <Facebook className="inline w-4 h-4 ml-1" /> פייסבוק
               </a>
             </li>
           </ul>
@@ -704,7 +778,7 @@ function Footer() {
           <h3 className="font-bold mb-3">אזורי שירות</h3>
           <p className="text-muted-foreground leading-relaxed">
             קריית אונו, גני תקווה, פתח תקווה, גבעת שמואל, יהוד, אור יהודה,
-            סביון, רמת גן, תל אביב ואזור המרכז.
+            סביון, רמת גן, תל אביב, ראשון לציון, חולון, בת ים ואזור המרכז.
           </p>
         </div>
       </div>
@@ -721,6 +795,7 @@ function FloatingButtons() {
     <div className="fixed bottom-4 inset-x-4 z-50 flex gap-3 md:hidden">
       <a
         href={`tel:${PHONE_TEL}`}
+        onClick={() => trackConversion("call", "floating")}
         className="flex-1 inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-3 rounded-2xl font-bold shadow-elegant"
       >
         <Phone className="w-5 h-5" /> התקשרו
@@ -729,6 +804,7 @@ function FloatingButtons() {
         href={WHATSAPP_URL}
         target="_blank"
         rel="noopener"
+        onClick={() => trackConversion("whatsapp", "floating")}
         className="flex-1 inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-4 py-3 rounded-2xl font-bold shadow-elegant"
       >
         <MessageCircle className="w-5 h-5" /> WhatsApp
@@ -759,9 +835,7 @@ function SectionHead({
     <div className="text-center max-w-2xl mx-auto">
       <SectionEyebrow>{eyebrow}</SectionEyebrow>
       <h2 className="text-3xl lg:text-4xl font-extrabold mt-4 mb-3">{title}</h2>
-      {subtitle && (
-        <p className="text-muted-foreground leading-relaxed">{subtitle}</p>
-      )}
+      {subtitle && <p className="text-muted-foreground leading-relaxed">{subtitle}</p>}
     </div>
   );
 }
