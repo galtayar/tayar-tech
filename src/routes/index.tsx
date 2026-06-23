@@ -46,19 +46,32 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
 )}`;
 const GOOGLE_BUSINESS_NAME = "טייאר אינסטלציה ושירותי ביובית";
 const GOOGLE_REVIEWS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(GOOGLE_BUSINESS_NAME)}`;
+const GOOGLE_MAPS_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(GOOGLE_BUSINESS_NAME)}&output=embed`;
 const FACEBOOK_URL = "https://www.facebook.com/tayargal/";
 
 // Click tracking — sends to gtag/dataLayer when Google Analytics/Ads is wired up.
-function trackConversion(action: "call" | "whatsapp", location: string) {
+function trackConversion(
+  action: "call" | "whatsapp" | "google_reviews" | "contact",
+  location: string,
+) {
   if (typeof window === "undefined") return;
   const w = window as unknown as {
     gtag?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
   };
+  const eventName =
+    action === "call"
+      ? "phone_call"
+      : action === "whatsapp"
+        ? "whatsapp_click"
+        : action === "google_reviews"
+          ? "google_reviews_click"
+          : "contact_click";
   const payload = { event_category: "engagement", event_label: location, action };
-  w.gtag?.("event", action === "call" ? "phone_call" : "whatsapp_click", payload);
-  w.dataLayer?.push({ event: action === "call" ? "phone_call" : "whatsapp_click", ...payload });
+  w.gtag?.("event", eventName, payload);
+  w.dataLayer?.push({ event: eventName, ...payload });
 }
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
