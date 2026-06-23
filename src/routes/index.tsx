@@ -83,26 +83,153 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "TAYAR TECH — טכנולוגיות צנרת מתקדמות. שיקום צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול, צילום ושטיפת קווי ביוב. מעל 12 שנות ניסיון, מוסמכי STS. שירות לפרטיים, ועדי בתים, חברות ניהול ורשויות.",
+          "TAYAR TECH — שיקום ותיקון צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול (CIPP), צילום קווי ביוב 360° וחידוש תשתיות מים וביוב. מעל 12 שנות ניסיון, מוסמכי STS. שירות לפרטיים, ועדי בתים, חברות ניהול ורשויות.",
       },
       {
         name: "keywords",
         content:
-          "שיקום צנרת ללא הרס, תיקון צנרת ללא הרס, תיקון צנרת בלי לשבור, תיקון צנרת ללא חפירה, תיקון פאץ׳, שיקום צנרת בשיטת שרוול, צילום קווי ביוב, שטיפת קווי ביוב, חידוש צנרת, שיקום מערכות ביוב, פתרונות מתקדמים לתשתיות מים וביוב, CIPP, טייאר טכנולוגיות צנרת",
+          "תיקון צנרת ללא הרס, שיקום צנרת ללא הרס, תיקון צנרת בלי לשבור, צילום קווי ביוב, תיקון פאץ', חידוש צנרת, שרוול לצנרת, צילום צנרת 360, אינסטלטור ללא הרס, שיקום תשתיות מים וביוב, CIPP, טייאר טכנולוגיות צנרת, TAYAR TECH",
       },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "geo.region", content: "IL" },
+      { name: "geo.placename", content: "אזור המרכז, ישראל" },
       { property: "og:title", content: "TAYAR TECH | טכנולוגיות צנרת מתקדמות" },
       {
         property: "og:description",
         content:
-          "שיקום ותיקון צנרת ללא הרס — שיטת פאץ׳ ושרוול, צילום קווי ביוב, מעל 12 שנות ניסיון.",
+          "שיקום ותיקון צנרת ללא הרס — שיטת פאץ׳ ושרוול, צילום קווי ביוב 360°. מעל 12 שנות ניסיון.",
       },
       { property: "og:url", content: "/" },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "TAYAR TECH" },
+      { property: "og:locale", content: "he_IL" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "TAYAR TECH | טכנולוגיות צנרת מתקדמות" },
+      {
+        name: "twitter:description",
+        content: "שיקום ותיקון צנרת ללא הרס — פאץ׳, שרוול וצילום קווי ביוב 360°.",
+      },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "#organization",
+              name: "TAYAR TECH — טייאר טכנולוגיות צנרת",
+              alternateName: ["טייאר טכנולוגיות צנרת", "טייאר אינסטלציה ושירותי ביובית"],
+              url: "/",
+              logo: "/",
+              telephone: "+972525718085",
+              sameAs: [
+                "https://www.facebook.com/tayargal/",
+                "https://www.google.com/maps/search/?api=1&query=" +
+                  encodeURIComponent("טייאר אינסטלציה ושירותי ביובית"),
+              ],
+              founder: { "@type": "Person", name: "גל טייאר" },
+            },
+            {
+              "@type": ["LocalBusiness", "Plumber"],
+              "@id": "#localbusiness",
+              name: "TAYAR TECH — טייאר טכנולוגיות צנרת",
+              image: "/",
+              description:
+                "שיקום ותיקון צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול (CIPP) וצילום קווי ביוב 360°. מעל 12 שנות ניסיון, מוסמכי STS.",
+              telephone: "+972525718085",
+              priceRange: "$$",
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "IL",
+                addressRegion: "מרכז",
+              },
+              areaServed: [
+                "קריית אונו","גני תקווה","פתח תקווה","גבעת שמואל","יהוד",
+                "אור יהודה","סביון","רמת גן","תל אביב","ראשון לציון",
+                "חולון","בת ים","בקעת אונו","אזור המרכז",
+              ].map((n) => ({ "@type": "City", name: n })),
+              openingHoursSpecification: [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: ["Sunday","Monday","Tuesday","Wednesday","Thursday"],
+                  opens: "08:00",
+                  closes: "19:00",
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: "Friday",
+                  opens: "08:00",
+                  closes: "13:00",
+                },
+              ],
+              sameAs: [
+                "https://www.facebook.com/tayargal/",
+                "https://www.google.com/maps/search/?api=1&query=" +
+                  encodeURIComponent("טייאר אינסטלציה ושירותי ביובית"),
+              ],
+              founder: { "@type": "Person", name: "גל טייאר" },
+              knowsAbout: [
+                "שיקום צנרת ללא הרס","תיקון צנרת ללא חפירה","תיקון פאץ׳",
+                "שיטת שרוול CIPP","צילום קווי ביוב","שטיפת קווי ביוב",
+                "שיקום מערכות ביוב","חידוש צנרת","צילום צנרת 360",
+              ],
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "5",
+                reviewCount: "20",
+              },
+            },
+            ...[
+              { name: "שיקום צנרת ללא הרס", desc: "שיקום פנימי מלא של מערכת הצנרת — בלי לשבור קירות, רצפות או ריצוף." },
+              { name: "תיקון צנרת ללא חפירה", desc: "תיקון צנרת מים וביוב ללא חפירות בחצר או ברחוב — מהיר ומדויק." },
+              { name: "תיקון פאץ׳ לצנרת", desc: "טיפול נקודתי באפוקסי בסדקים, חורים ונזילות בקטעי צנרת." },
+              { name: "שיקום צנרת בשיטת שרוול (CIPP)", desc: "יצירת ׳צינור בתוך צינור׳ — שרוול אפוקסי פנימי עמיד לעשרות שנים." },
+              { name: "צילום קווי ביוב 360°", desc: "אבחון מדויק של סתימות, שברים, שורשים ומפגעים בצנרת באמצעות מצלמות רובוטיות." },
+              { name: "שטיפת קווי ביוב", desc: "שטיפה בלחץ גבוה (ג׳טינג) להסרת שומנים, אבנית וסתימות עיקשות." },
+            ].map((s) => ({
+              "@type": "Service",
+              name: s.name,
+              description: s.desc,
+              serviceType: s.name,
+              provider: { "@id": "#localbusiness" },
+              areaServed: { "@type": "AdministrativeArea", name: "אזור המרכז, ישראל" },
+            })),
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "דף הבית", item: "/" },
+                { "@type": "ListItem", position: 2, name: "שירותים", item: "/#services" },
+                { "@type": "ListItem", position: 3, name: "אודות", item: "/#about" },
+                { "@type": "ListItem", position: 4, name: "שאלות נפוצות", item: "/#faq" },
+                { "@type": "ListItem", position: 5, name: "צור קשר", item: "/#contact" },
+              ],
+            },
+            {
+              "@type": "FAQPage",
+              mainEntity: [
+                { q: "מהו שיקום צנרת ללא הרס?", a: "שיקום צנרת ללא הרס הוא פתרון טכנולוגי מתקדם המאפשר להחזיר צנרת ישנה ופגומה למצב חדש — מבלי לשבור קירות, רצפות או חפירות בחצר. השיקום מתבצע מתוך הצנרת באמצעות שיטות פאץ׳ או שרוול (CIPP)." },
+                { q: "מהו תיקון פאץ׳?", a: "תיקון פאץ׳ הוא טיפול נקודתי בקטע פגום בצנרת — סדק, חור או חיבור דולף. מותקנת ׳טבעת׳ אפוקסי פנימית באורך של עד מטר אשר אוטמת לחלוטין את הקטע הפגום." },
+                { q: "מהו שיקום צנרת בשיטת שרוול (CIPP)?", a: "שיטת השרוול (Cured In Place Pipe) יוצרת ׳צינור בתוך צינור׳: שרוול ספוג ברזין אפוקסי מוחדר לקו הקיים ומתקשה למצב מוצק. התוצאה — קו חדש, עמיד לעשרות שנים." },
+                { q: "האם חייבים לחפור או לשבור קירות?", a: "לא. כל העבודה מתבצעת דרך פתחי גישה קיימים — ללא חפירות, ללא שבירת קירות ורצפות וללא נזק להחזרת המצב לקדמותו." },
+                { q: "כמה זמן נמשך התהליך?", a: "רוב תיקוני הפאץ׳ מתבצעים תוך מספר שעות באותו היום. שיקום מלא בשיטת שרוול לבניין אורך בדרך כלל בין יום אחד לכמה ימי עבודה." },
+                { q: "מתי מומלץ לבצע צילום קווי ביוב?", a: "מומלץ לפני רכישת נכס, לאחר סתימות חוזרות, כשמופיעות נזילות לא מוסברות, או כתחזוקה תקופתית למבני מגורים, ועדי בתים, מוסדות ועסקים." },
+              ].map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: HomePage,
 });
+
 
 function HomePage() {
   return (
