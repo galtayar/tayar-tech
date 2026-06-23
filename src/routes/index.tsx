@@ -233,7 +233,7 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   return (
-    <div className="min-h-screen bg-background text-foreground" dir="rtl">
+    <div className="min-h-screen bg-background text-foreground pb-24 md:pb-0" dir="rtl">
       <Header />
       <main>
         <Hero />
