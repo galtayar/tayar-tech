@@ -911,7 +911,7 @@ function CTA() {
   return (
     <section id="contact" className="py-20 lg:py-28">
       <div className="container-section">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-primary shadow-elegant px-8 py-14 lg:px-16 lg:py-20 text-center text-primary-foreground">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-primary shadow-elegant px-6 sm:px-8 py-14 lg:px-16 lg:py-20 text-center text-primary-foreground">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.18),transparent_50%)]" />
           <div className="relative">
             <h2 className="text-3xl lg:text-4xl font-extrabold mb-4">
@@ -924,7 +924,7 @@ function CTA() {
               <a
                 href={`tel:${PHONE_TEL}`}
                 onClick={() => trackConversion("call", "cta")}
-                className="inline-flex items-center justify-center gap-2 bg-white text-primary px-6 py-3.5 rounded-xl font-bold hover:bg-white/90 transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-white text-primary px-6 py-4 rounded-xl font-bold hover:bg-white/90 transition-colors min-h-[52px]"
               >
                 <Phone className="w-5 h-5" />
                 התקשרו עכשיו {PHONE}
@@ -934,10 +934,58 @@ function CTA() {
                 target="_blank"
                 rel="noopener"
                 onClick={() => trackConversion("whatsapp", "cta")}
-                className="inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-6 py-3.5 rounded-xl font-bold hover:scale-[1.02] transition-transform"
+                className="inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-6 py-4 rounded-xl font-bold hover:scale-[1.02] transition-transform min-h-[52px]"
               >
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Google Business — Map + link */}
+        <div className="mt-12 grid lg:grid-cols-2 gap-6 items-stretch">
+          <div className="rounded-3xl overflow-hidden border border-border shadow-card-soft bg-card">
+            <iframe
+              title="מיקום העסק בגוגל מפות — טייאר אינסטלציה ושירותי ביובית"
+              src={GOOGLE_MAPS_EMBED_URL}
+              width="100%"
+              height="100%"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-[320px] lg:h-full border-0"
+              allowFullScreen
+            />
+          </div>
+          <div className="bg-card border border-border rounded-3xl p-7 lg:p-9 flex flex-col justify-center shadow-card-soft">
+            <SectionEyebrow>הכרטיס שלנו בגוגל</SectionEyebrow>
+            <h3 className="text-2xl font-extrabold mt-3 mb-3">
+              טייאר אינסטלציה ושירותי ביובית
+            </h3>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              עקבו אחרי הביקורות, התמונות והעדכונים שלנו בכרטיס העסק בגוגל —
+              חברה מובילה בתחום שיקום הצנרת באזור המרכז.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener"
+                onClick={() => trackConversion("google_reviews", "contact_view")}
+                className="inline-flex items-center justify-center gap-2 bg-card border border-border px-5 py-3.5 rounded-xl font-semibold hover:shadow-card-soft transition-shadow min-h-[48px]"
+              >
+                <MapPin className="w-4 h-4 text-primary" />
+                לכרטיס העסק בגוגל
+              </a>
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener"
+                onClick={() => trackConversion("google_reviews", "contact_leave")}
+                className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3.5 rounded-xl font-semibold hover:bg-primary-glow transition-colors min-h-[48px]"
+              >
+                <Star className="w-4 h-4 fill-current" />
+                השאירו ביקורת בגוגל
               </a>
             </div>
           </div>
@@ -946,6 +994,7 @@ function CTA() {
     </section>
   );
 }
+
 
 /* ---------- Footer ---------- */
 function Footer() {
