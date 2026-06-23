@@ -799,7 +799,8 @@ function Testimonials() {
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center gap-2 bg-card border border-border px-5 py-3 rounded-xl font-semibold text-foreground hover:shadow-card-soft transition-shadow"
+            onClick={() => trackConversion("google_reviews", "testimonials_view")}
+            className="inline-flex items-center justify-center gap-2 bg-card border border-border px-5 py-3.5 rounded-xl font-semibold text-foreground hover:shadow-card-soft transition-shadow min-h-[48px]"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -813,12 +814,14 @@ function Testimonials() {
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-xl font-semibold hover:bg-primary-glow shadow-glow transition-colors"
+            onClick={() => trackConversion("google_reviews", "testimonials_leave")}
+            className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3.5 rounded-xl font-semibold hover:bg-primary-glow shadow-glow transition-colors min-h-[48px]"
           >
             <Star className="w-4 h-4 fill-current" />
             השאירו לנו ביקורת בגוגל
           </a>
         </div>
+
       </div>
     </section>
   );
