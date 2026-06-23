@@ -1042,10 +1042,17 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener" className="hover:text-primary">
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener"
+                onClick={() => trackConversion("google_reviews", "footer")}
+                className="hover:text-primary"
+              >
                 ביקורות בגוגל ★
               </a>
             </li>
+
             <li>
               <a href={FACEBOOK_URL} target="_blank" rel="noopener" className="hover:text-primary">
                 <Facebook className="inline w-4 h-4 ml-1" /> פייסבוק
