@@ -409,7 +409,6 @@ function About() {
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/85 to-transparent p-5 pt-16 text-primary-foreground">
               <div className="font-display font-extrabold text-xl">גל טייאר</div>
-              <div className="text-sm opacity-90">מייסד ומנכ״ל TAYAR TECH</div>
             </div>
           </div>
           <div className="absolute -bottom-5 -left-5 bg-card border border-border rounded-2xl shadow-card-soft px-5 py-4">
