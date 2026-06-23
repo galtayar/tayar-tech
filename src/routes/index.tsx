@@ -46,19 +46,32 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
 )}`;
 const GOOGLE_BUSINESS_NAME = "טייאר אינסטלציה ושירותי ביובית";
 const GOOGLE_REVIEWS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(GOOGLE_BUSINESS_NAME)}`;
+const GOOGLE_MAPS_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(GOOGLE_BUSINESS_NAME)}&output=embed`;
 const FACEBOOK_URL = "https://www.facebook.com/tayargal/";
 
 // Click tracking — sends to gtag/dataLayer when Google Analytics/Ads is wired up.
-function trackConversion(action: "call" | "whatsapp", location: string) {
+function trackConversion(
+  action: "call" | "whatsapp" | "google_reviews" | "contact",
+  location: string,
+) {
   if (typeof window === "undefined") return;
   const w = window as unknown as {
     gtag?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
   };
+  const eventName =
+    action === "call"
+      ? "phone_call"
+      : action === "whatsapp"
+        ? "whatsapp_click"
+        : action === "google_reviews"
+          ? "google_reviews_click"
+          : "contact_click";
   const payload = { event_category: "engagement", event_label: location, action };
-  w.gtag?.("event", action === "call" ? "phone_call" : "whatsapp_click", payload);
-  w.dataLayer?.push({ event: action === "call" ? "phone_call" : "whatsapp_click", ...payload });
+  w.gtag?.("event", eventName, payload);
+  w.dataLayer?.push({ event: eventName, ...payload });
 }
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -70,30 +83,157 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "TAYAR TECH — טכנולוגיות צנרת מתקדמות. שיקום צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול, צילום ושטיפת קווי ביוב. מעל 12 שנות ניסיון, מוסמכי STS. שירות לפרטיים, ועדי בתים, חברות ניהול ורשויות.",
+          "TAYAR TECH — שיקום ותיקון צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול (CIPP), צילום קווי ביוב 360° וחידוש תשתיות מים וביוב. מעל 12 שנות ניסיון, מוסמכי STS. שירות לפרטיים, ועדי בתים, חברות ניהול ורשויות.",
       },
       {
         name: "keywords",
         content:
-          "שיקום צנרת ללא הרס, תיקון צנרת ללא הרס, תיקון צנרת בלי לשבור, תיקון צנרת ללא חפירה, תיקון פאץ׳, שיקום צנרת בשיטת שרוול, צילום קווי ביוב, שטיפת קווי ביוב, חידוש צנרת, שיקום מערכות ביוב, פתרונות מתקדמים לתשתיות מים וביוב, CIPP, טייאר טכנולוגיות צנרת",
+          "תיקון צנרת ללא הרס, שיקום צנרת ללא הרס, תיקון צנרת בלי לשבור, צילום קווי ביוב, תיקון פאץ', חידוש צנרת, שרוול לצנרת, צילום צנרת 360, אינסטלטור ללא הרס, שיקום תשתיות מים וביוב, CIPP, טייאר טכנולוגיות צנרת, TAYAR TECH",
       },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "geo.region", content: "IL" },
+      { name: "geo.placename", content: "אזור המרכז, ישראל" },
       { property: "og:title", content: "TAYAR TECH | טכנולוגיות צנרת מתקדמות" },
       {
         property: "og:description",
         content:
-          "שיקום ותיקון צנרת ללא הרס — שיטת פאץ׳ ושרוול, צילום קווי ביוב, מעל 12 שנות ניסיון.",
+          "שיקום ותיקון צנרת ללא הרס — שיטת פאץ׳ ושרוול, צילום קווי ביוב 360°. מעל 12 שנות ניסיון.",
       },
       { property: "og:url", content: "/" },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "TAYAR TECH" },
+      { property: "og:locale", content: "he_IL" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "TAYAR TECH | טכנולוגיות צנרת מתקדמות" },
+      {
+        name: "twitter:description",
+        content: "שיקום ותיקון צנרת ללא הרס — פאץ׳, שרוול וצילום קווי ביוב 360°.",
+      },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "#organization",
+              name: "TAYAR TECH — טייאר טכנולוגיות צנרת",
+              alternateName: ["טייאר טכנולוגיות צנרת", "טייאר אינסטלציה ושירותי ביובית"],
+              url: "/",
+              logo: "/",
+              telephone: "+972525718085",
+              sameAs: [
+                "https://www.facebook.com/tayargal/",
+                "https://www.google.com/maps/search/?api=1&query=" +
+                  encodeURIComponent("טייאר אינסטלציה ושירותי ביובית"),
+              ],
+              founder: { "@type": "Person", name: "גל טייאר" },
+            },
+            {
+              "@type": ["LocalBusiness", "Plumber"],
+              "@id": "#localbusiness",
+              name: "TAYAR TECH — טייאר טכנולוגיות צנרת",
+              image: "/",
+              description:
+                "שיקום ותיקון צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול (CIPP) וצילום קווי ביוב 360°. מעל 12 שנות ניסיון, מוסמכי STS.",
+              telephone: "+972525718085",
+              priceRange: "$$",
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "IL",
+                addressRegion: "מרכז",
+              },
+              areaServed: [
+                "קריית אונו","גני תקווה","פתח תקווה","גבעת שמואל","יהוד",
+                "אור יהודה","סביון","רמת גן","תל אביב","ראשון לציון",
+                "חולון","בת ים","בקעת אונו","אזור המרכז",
+              ].map((n) => ({ "@type": "City", name: n })),
+              openingHoursSpecification: [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: ["Sunday","Monday","Tuesday","Wednesday","Thursday"],
+                  opens: "08:00",
+                  closes: "19:00",
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: "Friday",
+                  opens: "08:00",
+                  closes: "13:00",
+                },
+              ],
+              sameAs: [
+                "https://www.facebook.com/tayargal/",
+                "https://www.google.com/maps/search/?api=1&query=" +
+                  encodeURIComponent("טייאר אינסטלציה ושירותי ביובית"),
+              ],
+              founder: { "@type": "Person", name: "גל טייאר" },
+              knowsAbout: [
+                "שיקום צנרת ללא הרס","תיקון צנרת ללא חפירה","תיקון פאץ׳",
+                "שיטת שרוול CIPP","צילום קווי ביוב","שטיפת קווי ביוב",
+                "שיקום מערכות ביוב","חידוש צנרת","צילום צנרת 360",
+              ],
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "5",
+                reviewCount: "20",
+              },
+            },
+            ...[
+              { name: "שיקום צנרת ללא הרס", desc: "שיקום פנימי מלא של מערכת הצנרת — בלי לשבור קירות, רצפות או ריצוף." },
+              { name: "תיקון צנרת ללא חפירה", desc: "תיקון צנרת מים וביוב ללא חפירות בחצר או ברחוב — מהיר ומדויק." },
+              { name: "תיקון פאץ׳ לצנרת", desc: "טיפול נקודתי באפוקסי בסדקים, חורים ונזילות בקטעי צנרת." },
+              { name: "שיקום צנרת בשיטת שרוול (CIPP)", desc: "יצירת ׳צינור בתוך צינור׳ — שרוול אפוקסי פנימי עמיד לעשרות שנים." },
+              { name: "צילום קווי ביוב 360°", desc: "אבחון מדויק של סתימות, שברים, שורשים ומפגעים בצנרת באמצעות מצלמות רובוטיות." },
+              { name: "שטיפת קווי ביוב", desc: "שטיפה בלחץ גבוה (ג׳טינג) להסרת שומנים, אבנית וסתימות עיקשות." },
+            ].map((s) => ({
+              "@type": "Service",
+              name: s.name,
+              description: s.desc,
+              serviceType: s.name,
+              provider: { "@id": "#localbusiness" },
+              areaServed: { "@type": "AdministrativeArea", name: "אזור המרכז, ישראל" },
+            })),
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "דף הבית", item: "/" },
+                { "@type": "ListItem", position: 2, name: "שירותים", item: "/#services" },
+                { "@type": "ListItem", position: 3, name: "אודות", item: "/#about" },
+                { "@type": "ListItem", position: 4, name: "שאלות נפוצות", item: "/#faq" },
+                { "@type": "ListItem", position: 5, name: "צור קשר", item: "/#contact" },
+              ],
+            },
+            {
+              "@type": "FAQPage",
+              mainEntity: [
+                { q: "מהו שיקום צנרת ללא הרס?", a: "שיקום צנרת ללא הרס הוא פתרון טכנולוגי מתקדם המאפשר להחזיר צנרת ישנה ופגומה למצב חדש — מבלי לשבור קירות, רצפות או חפירות בחצר. השיקום מתבצע מתוך הצנרת באמצעות שיטות פאץ׳ או שרוול (CIPP)." },
+                { q: "מהו תיקון פאץ׳?", a: "תיקון פאץ׳ הוא טיפול נקודתי בקטע פגום בצנרת — סדק, חור או חיבור דולף. מותקנת ׳טבעת׳ אפוקסי פנימית באורך של עד מטר אשר אוטמת לחלוטין את הקטע הפגום." },
+                { q: "מהו שיקום צנרת בשיטת שרוול (CIPP)?", a: "שיטת השרוול (Cured In Place Pipe) יוצרת ׳צינור בתוך צינור׳: שרוול ספוג ברזין אפוקסי מוחדר לקו הקיים ומתקשה למצב מוצק. התוצאה — קו חדש, עמיד לעשרות שנים." },
+                { q: "האם חייבים לחפור או לשבור קירות?", a: "לא. כל העבודה מתבצעת דרך פתחי גישה קיימים — ללא חפירות, ללא שבירת קירות ורצפות וללא נזק להחזרת המצב לקדמותו." },
+                { q: "כמה זמן נמשך התהליך?", a: "רוב תיקוני הפאץ׳ מתבצעים תוך מספר שעות באותו היום. שיקום מלא בשיטת שרוול לבניין אורך בדרך כלל בין יום אחד לכמה ימי עבודה." },
+                { q: "מתי מומלץ לבצע צילום קווי ביוב?", a: "מומלץ לפני רכישת נכס, לאחר סתימות חוזרות, כשמופיעות נזילות לא מוסברות, או כתחזוקה תקופתית למבני מגורים, ועדי בתים, מוסדות ועסקים." },
+              ].map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: HomePage,
 });
 
+
 function HomePage() {
   return (
-    <div className="min-h-screen bg-background text-foreground" dir="rtl">
+    <div className="min-h-screen bg-background text-foreground pb-24 md:pb-0" dir="rtl">
       <Header />
       <main>
         <Hero />
@@ -659,7 +799,8 @@ function Testimonials() {
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center gap-2 bg-card border border-border px-5 py-3 rounded-xl font-semibold text-foreground hover:shadow-card-soft transition-shadow"
+            onClick={() => trackConversion("google_reviews", "testimonials_view")}
+            className="inline-flex items-center justify-center gap-2 bg-card border border-border px-5 py-3.5 rounded-xl font-semibold text-foreground hover:shadow-card-soft transition-shadow min-h-[48px]"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -673,12 +814,14 @@ function Testimonials() {
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-xl font-semibold hover:bg-primary-glow shadow-glow transition-colors"
+            onClick={() => trackConversion("google_reviews", "testimonials_leave")}
+            className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3.5 rounded-xl font-semibold hover:bg-primary-glow shadow-glow transition-colors min-h-[48px]"
           >
             <Star className="w-4 h-4 fill-current" />
             השאירו לנו ביקורת בגוגל
           </a>
         </div>
+
       </div>
     </section>
   );
@@ -768,7 +911,7 @@ function CTA() {
   return (
     <section id="contact" className="py-20 lg:py-28">
       <div className="container-section">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-primary shadow-elegant px-8 py-14 lg:px-16 lg:py-20 text-center text-primary-foreground">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-primary shadow-elegant px-6 sm:px-8 py-14 lg:px-16 lg:py-20 text-center text-primary-foreground">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.18),transparent_50%)]" />
           <div className="relative">
             <h2 className="text-3xl lg:text-4xl font-extrabold mb-4">
@@ -781,7 +924,7 @@ function CTA() {
               <a
                 href={`tel:${PHONE_TEL}`}
                 onClick={() => trackConversion("call", "cta")}
-                className="inline-flex items-center justify-center gap-2 bg-white text-primary px-6 py-3.5 rounded-xl font-bold hover:bg-white/90 transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-white text-primary px-6 py-4 rounded-xl font-bold hover:bg-white/90 transition-colors min-h-[52px]"
               >
                 <Phone className="w-5 h-5" />
                 התקשרו עכשיו {PHONE}
@@ -791,10 +934,58 @@ function CTA() {
                 target="_blank"
                 rel="noopener"
                 onClick={() => trackConversion("whatsapp", "cta")}
-                className="inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-6 py-3.5 rounded-xl font-bold hover:scale-[1.02] transition-transform"
+                className="inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-6 py-4 rounded-xl font-bold hover:scale-[1.02] transition-transform min-h-[52px]"
               >
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Google Business — Map + link */}
+        <div className="mt-12 grid lg:grid-cols-2 gap-6 items-stretch">
+          <div className="rounded-3xl overflow-hidden border border-border shadow-card-soft bg-card">
+            <iframe
+              title="מיקום העסק בגוגל מפות — טייאר אינסטלציה ושירותי ביובית"
+              src={GOOGLE_MAPS_EMBED_URL}
+              width="100%"
+              height="100%"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-[320px] lg:h-full border-0"
+              allowFullScreen
+            />
+          </div>
+          <div className="bg-card border border-border rounded-3xl p-7 lg:p-9 flex flex-col justify-center shadow-card-soft">
+            <SectionEyebrow>הכרטיס שלנו בגוגל</SectionEyebrow>
+            <h3 className="text-2xl font-extrabold mt-3 mb-3">
+              טייאר אינסטלציה ושירותי ביובית
+            </h3>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              עקבו אחרי הביקורות, התמונות והעדכונים שלנו בכרטיס העסק בגוגל —
+              חברה מובילה בתחום שיקום הצנרת באזור המרכז.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener"
+                onClick={() => trackConversion("google_reviews", "contact_view")}
+                className="inline-flex items-center justify-center gap-2 bg-card border border-border px-5 py-3.5 rounded-xl font-semibold hover:shadow-card-soft transition-shadow min-h-[48px]"
+              >
+                <MapPin className="w-4 h-4 text-primary" />
+                לכרטיס העסק בגוגל
+              </a>
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener"
+                onClick={() => trackConversion("google_reviews", "contact_leave")}
+                className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3.5 rounded-xl font-semibold hover:bg-primary-glow transition-colors min-h-[48px]"
+              >
+                <Star className="w-4 h-4 fill-current" />
+                השאירו ביקורת בגוגל
               </a>
             </div>
           </div>
@@ -803,6 +994,7 @@ function CTA() {
     </section>
   );
 }
+
 
 /* ---------- Footer ---------- */
 function Footer() {
@@ -850,10 +1042,17 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener" className="hover:text-primary">
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener"
+                onClick={() => trackConversion("google_reviews", "footer")}
+                className="hover:text-primary"
+              >
                 ביקורות בגוגל ★
               </a>
             </li>
+
             <li>
               <a href={FACEBOOK_URL} target="_blank" rel="noopener" className="hover:text-primary">
                 <Facebook className="inline w-4 h-4 ml-1" /> פייסבוק
