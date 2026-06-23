@@ -84,7 +84,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "TAYAR TECH — טכנולוגיות צנרת מתקדמות. שיקום ותיקון צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול, צילום ושטיפת קווי ביוב. מעל 12 שנות ניסיון.",
       },
       { name: "author", content: "TAYAR TECH" },
-      { property: "og:title", content: "TAYAR TECH | טכנולוגיות צנרת מתקדמות" },
+      { property: "og:title", content: "TAYAR TECH | שיקום צנרת ללא הרס, תיקון פאץ׳ וצילום קווי ביוב" },
       {
         property: "og:description",
         content:
@@ -94,6 +94,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:locale", content: "he_IL" },
       { property: "og:site_name", content: "TAYAR TECH" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "TAYAR TECH | שיקום צנרת ללא הרס, תיקון פאץ׳ וצילום קווי ביוב" },
+      { name: "description", content: "Speak Hebrew Freely is a website for Tayar Tech, a company specializing in advanced pipe repair and rehabilitation." },
+      { property: "og:description", content: "Speak Hebrew Freely is a website for Tayar Tech, a company specializing in advanced pipe repair and rehabilitation." },
+      { name: "twitter:description", content: "Speak Hebrew Freely is a website for Tayar Tech, a company specializing in advanced pipe repair and rehabilitation." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/teZFO1DOyMf0fA0gPT1zcP09v522/social-images/social-1782238787737-ChatGPT_Image_Jun_7,_2026,_09_22_39_PM.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/teZFO1DOyMf0fA0gPT1zcP09v522/social-images/social-1782238787737-ChatGPT_Image_Jun_7,_2026,_09_22_39_PM.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -139,21 +145,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  const gaId = import.meta.env.VITE_GA4_MEASUREMENT_ID as string | undefined;
   return (
     <html lang="he" dir="rtl">
       <head>
         <HeadContent />
-        {gaId ? (
-          <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{anonymize_ip:true});`,
-              }}
-            />
-          </>
-        ) : null}
       </head>
       <body>
         {children}
@@ -163,7 +158,6 @@ function RootShell({ children }: { children: ReactNode }) {
     </html>
   );
 }
-
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
