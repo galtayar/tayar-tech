@@ -195,40 +195,121 @@ function Header() {
 /* ---------- Hero ---------- */
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden bg-gradient-hero">
-      {/* Subtle geometric tech background */}
+    <section
+      id="top"
+      className="relative overflow-hidden bg-white"
+    >
+      {/* Clean white base with very subtle white→light-sky gradient */}
       <div
         aria-hidden
-        className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(var(--color-primary)_1px,transparent_1px),linear-gradient(90deg,var(--color-primary)_1px,transparent_1px)] [background-size:48px_48px]"
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(160deg, #ffffff 0%, #f5fbff 45%, #e8f4ff 100%)",
+        }}
       />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(37,99,235,0.12),transparent_55%)]" />
 
-      <div className="container-section relative grid lg:grid-cols-2 gap-12 items-center py-14 lg:py-20">
+      {/* Soft tech aura */}
+      <div
+        aria-hidden
+        className="absolute -top-32 -right-32 w-[42rem] h-[42rem] rounded-full blur-3xl opacity-60"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(56,132,255,0.18) 0%, rgba(56,132,255,0) 70%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute -bottom-40 -left-32 w-[36rem] h-[36rem] rounded-full blur-3xl opacity-50"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(125,200,255,0.22) 0%, rgba(125,200,255,0) 70%)",
+        }}
+      />
+
+      {/* Flow lines / pipes — abstract minimal SVG */}
+      <svg
+        aria-hidden
+        className="absolute inset-0 w-full h-full opacity-[0.35] pointer-events-none"
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="xMidYMid slice"
+        fill="none"
+      >
+        <defs>
+          <linearGradient id="flow1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0" />
+            <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="flow2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#60a5fa" stopOpacity="0" />
+            <stop offset="50%" stopColor="#60a5fa" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="#60a5fa" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path d="M-50 200 C 300 150, 500 350, 800 300 S 1300 250, 1500 320" stroke="url(#flow1)" strokeWidth="1.5" />
+        <path d="M-50 420 C 280 380, 520 540, 820 500 S 1280 460, 1500 520" stroke="url(#flow2)" strokeWidth="1.2" />
+        <path d="M-50 660 C 320 620, 540 760, 860 720 S 1300 680, 1500 740" stroke="url(#flow1)" strokeWidth="1" />
+        {/* geometric dots */}
+        <g fill="#3b82f6" opacity="0.35">
+          <circle cx="180" cy="200" r="3" />
+          <circle cx="820" cy="300" r="3" />
+          <circle cx="1280" cy="250" r="3" />
+          <circle cx="540" cy="540" r="3" />
+          <circle cx="1180" cy="460" r="3" />
+        </g>
+        {/* subtle grid corner */}
+        <g stroke="#bfdbfe" strokeWidth="0.5" opacity="0.5">
+          <path d="M1100 60 H1400 M1100 110 H1400 M1100 160 H1400" />
+          <path d="M1140 30 V200 M1200 30 V200 M1260 30 V200 M1320 30 V200" />
+        </g>
+      </svg>
+
+      {/* Giant centered logo watermark — original colors, soft depth */}
+      <div
+        aria-hidden
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+      >
+        <img
+          src={logoAsset.url}
+          alt=""
+          className="w-[78%] max-w-[900px] opacity-[0.10] blur-[1px] select-none"
+          style={{ filter: "drop-shadow(0 20px 60px rgba(37,99,235,0.18))" }}
+        />
+      </div>
+
+      <div className="container-section relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center py-20 lg:py-32">
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-6">
+          {/* Trust strip */}
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] md:text-xs font-semibold text-primary mb-8">
+            {[
+              "12 שנות ניסיון",
+              "מוסמך STS",
+              "צילום קווי ביוב 360°",
+              "עיריות וחברות ניהול",
+            ].map((t, i) => (
+              <span key={t} className="flex items-center gap-2">
+                {i > 0 && <span className="w-1 h-1 rounded-full bg-primary/40" />}
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-7">
             <Sparkles className="w-3.5 h-3.5" />
             TAYAR TECH | טכנולוגיות צנרת מתקדמות
           </div>
 
-          {/* Brand logo — prominent, not a watermark */}
-          <div className="relative mb-7 inline-block">
-            <div className="absolute inset-0 -m-4 bg-primary/20 blur-2xl rounded-full" aria-hidden />
-            <img
-              src={logoAsset.url}
-              alt="TAYAR TECH לוגו"
-              className="relative h-24 md:h-32 w-auto drop-shadow-[0_8px_30px_rgba(37,99,235,0.35)]"
-            />
-          </div>
-
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-4">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight mb-7">
             שיקום ותיקון צנרת
             <br />
             <span className="text-gradient">ללא הרס</span>
           </h1>
-          <p className="text-lg text-foreground/80 font-semibold mb-3 max-w-xl leading-relaxed">
+          <p className="text-lg md:text-xl text-foreground/80 font-semibold mb-4 max-w-xl leading-relaxed">
             פתרונות מתקדמים לשיקום וחידוש תשתיות מים וביוב
           </p>
-          <p className="text-base text-muted-foreground mb-8 max-w-xl leading-relaxed">
+          <p className="text-base text-muted-foreground mb-10 max-w-xl leading-relaxed">
             צילום קווי ביוב, חידוש צנרת ופתרונות מתקדמים לתשתיות מים וביוב —
             לבתים פרטיים, בניינים, עסקים, חברות ניהול ורשויות מקומיות.
           </p>
@@ -236,7 +317,7 @@ function Hero() {
             <a
               href={`tel:${PHONE_TEL}`}
               onClick={() => trackConversion("call", "hero")}
-              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 rounded-xl font-bold shadow-elegant hover:bg-primary-glow transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-7 py-4 rounded-xl font-bold shadow-elegant hover:bg-primary-glow transition-colors"
             >
               <Phone className="w-5 h-5" />
               התקשרו עכשיו
@@ -246,30 +327,37 @@ function Hero() {
               target="_blank"
               rel="noopener"
               onClick={() => trackConversion("whatsapp", "hero")}
-              className="inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-6 py-3.5 rounded-xl font-bold shadow-card-soft hover:scale-[1.02] transition-transform"
+              className="inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-7 py-4 rounded-xl font-bold shadow-card-soft hover:scale-[1.02] transition-transform"
             >
               <MessageCircle className="w-5 h-5" />
               WhatsApp
             </a>
           </div>
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-            {["12+ שנות ניסיון", "מוסמכי STS", "ללא חפירה. ללא הרס."].map((t) => (
-              <div key={t} className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-success" />
-                {t}
-              </div>
-            ))}
-          </div>
         </div>
-        <div className="relative">
-          <div className="absolute -inset-6 bg-primary/15 blur-3xl rounded-full animate-float" />
-          <img
-            src={heroImage}
-            alt="חתך פנימי של צינור עם שיקום פנימי בשיטת שרוול / פאץ׳ — TAYAR TECH"
-            width={1536}
-            height={1152}
-            className="relative rounded-3xl shadow-elegant w-full object-cover"
+
+        {/* Hero image — large, ~50% of hero */}
+        <div className="relative lg:scale-110 lg:origin-left">
+          <div
+            aria-hidden
+            className="absolute -inset-8 rounded-[2.5rem] blur-3xl opacity-60"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 50%, rgba(59,130,246,0.25), transparent 70%)",
+            }}
           />
+          <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-primary/10 shadow-elegant">
+            <img
+              src={heroImage}
+              alt="חתך פנימי של צינור עם שיקום פנימי בשיטת שרוול / פאץ׳ — TAYAR TECH"
+              width={1536}
+              height={1152}
+              className="w-full object-cover aspect-[4/3]"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-transparent"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -321,7 +409,6 @@ function About() {
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/85 to-transparent p-5 pt-16 text-primary-foreground">
               <div className="font-display font-extrabold text-xl">גל טייאר</div>
-              <div className="text-sm opacity-90">מייסד ומנכ״ל TAYAR TECH</div>
             </div>
           </div>
           <div className="absolute -bottom-5 -left-5 bg-card border border-border rounded-2xl shadow-card-soft px-5 py-4">
