@@ -273,16 +273,17 @@ function Header() {
         aria-label="TAYAR TECH — דף הבית"
         className="block w-full"
       >
-        <div className="mx-auto flex items-center justify-center px-4 pt-1 pb-1 max-w-6xl">
+        <div className="mx-auto flex items-center justify-center px-4 py-1 max-w-6xl">
           <img
             src={logoHorizontal.url}
             alt="TAYAR TECH — טייאר טכנולוגיות צנרת"
-            className="w-[78%] max-w-[880px] h-auto object-contain"
+            className="h-14 sm:h-16 md:h-[72px] w-auto object-contain"
             width={1600}
             height={680}
             fetchPriority="high"
           />
         </div>
+
       </a>
 
       {/* Navigation row */}
