@@ -29,15 +29,15 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import heroImage from "@/assets/hero-pipe-cutaway.jpg";
-import logoAsset from "@/assets/tayar-tech-logo.png.asset.json";
+const logoAsset = { url: "/tayar-tech-logo.png" };
+const galProfile = { url: "/gal-profile.jpg" };
+const logoGaneiTikva = { url: "/clients/ganei-tikva.png" };
+const logoKiryatOno = { url: "/clients/kiryat-ono.png" };
+const logoNesher = { url: "/clients/nesher.png" };
+const logoYakir = { url: "/clients/yakir.png" };
+const logoMeatbar = { url: "/clients/meatbar.jpg" };
+const logoOved = { url: "/clients/oved.png" };
 const logoHorizontal = { url: "/logo.png" };
-import galProfile from "@/assets/gal-profile.jpg.asset.json";
-import logoGaneiTikva from "@/assets/clients/ganei-tikva.png.asset.json";
-import logoKiryatOno from "@/assets/clients/kiryat-ono.png.asset.json";
-import logoNesher from "@/assets/clients/nesher.png.asset.json";
-import logoYakir from "@/assets/clients/yakir.png.asset.json";
-import logoMeatbar from "@/assets/clients/meatbar.jpg.asset.json";
-import logoOved from "@/assets/clients/oved.png.asset.json";
 
 const PHONE = "052-5718085";
 const PHONE_TEL = "+972525718085";
