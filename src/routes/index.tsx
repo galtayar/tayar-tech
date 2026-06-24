@@ -277,7 +277,7 @@ function Header() {
           <img
             src={logoHorizontal.url}
             alt="TAYAR TECH — טייאר טכנולוגיות צנרת"
-            className="h-14 sm:h-16 md:h-[72px] w-auto object-contain"
+            className="w-[78%] max-w-[760px] h-auto max-h-20 object-contain"
             width={1600}
             height={680}
             fetchPriority="high"
