@@ -265,31 +265,22 @@ function Header() {
     { href: "#faq", label: "שאלות נפוצות" },
   ];
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-md bg-background/90 border-b border-border">
-      {/* Full-width brand strip — TAYAR TECH front and center */}
+    <header className="sticky top-0 z-40 backdrop-blur-md bg-background/95 border-b border-border">
+      {/* Full-width brand banner — TAYAR TECH logo as primary visual identity */}
       <a
         href="#top"
-        className="block w-full border-b border-border/60 bg-gradient-to-l from-background via-secondary/40 to-background"
+        aria-label="TAYAR TECH — דף הבית"
+        className="block w-full border-b border-border/60 bg-gradient-to-b from-secondary/30 via-background to-background"
       >
-        <div className="container-section flex items-center justify-center gap-4 py-3 md:py-4">
+        <div className="flex items-center justify-center px-4 py-8 md:py-12">
           <img
             src={logoAsset.url}
             alt="TAYAR TECH — טייאר טכנולוגיות צנרת"
-            className="h-12 md:h-16 w-auto"
-            width={180}
-            height={60}
+            className="h-32 sm:h-40 md:h-52 lg:h-60 w-auto object-contain drop-shadow-sm"
+            width={520}
+            height={260}
+            fetchPriority="high"
           />
-          <div className="flex flex-col items-start leading-tight">
-            <span
-              className="text-2xl md:text-4xl font-extrabold tracking-[0.18em] text-primary"
-              style={{ fontFamily: "Rubik, Heebo, sans-serif" }}
-            >
-              TAYAR TECH
-            </span>
-            <span className="hidden sm:block text-[11px] md:text-sm font-medium text-muted-foreground tracking-wide">
-              טייאר טכנולוגיות צנרת · שיקום צנרת ללא הרס
-            </span>
-          </div>
         </div>
       </a>
 
