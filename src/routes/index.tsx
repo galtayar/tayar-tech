@@ -277,7 +277,7 @@ function Header() {
           <img
             src={logoHorizontal.url}
             alt="TAYAR TECH — טייאר טכנולוגיות צנרת"
-            className="w-[78%] max-w-[760px] h-auto max-h-20 object-contain"
+            className="w-[98%] max-w-[1280px] h-auto max-h-24 object-contain"
             width={1600}
             height={680}
             fetchPriority="high"
@@ -431,7 +431,7 @@ function Hero() {
         />
       </div>
 
-      <div className="container-section relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center py-20 lg:py-32">
+      <div className="container-section relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center py-4 lg:py-6">
         <div className="relative z-10">
           {/* Trust strip */}
           <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] md:text-xs font-semibold text-primary mb-8">
