@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/accordion";
 import heroImage from "@/assets/hero-pipe-cutaway.jpg";
 import logoAsset from "@/assets/tayar-tech-logo.png.asset.json";
+import logoHorizontal from "@/assets/tayar-tech-logo-horizontal.png.asset.json";
 import galProfile from "@/assets/gal-profile.jpg.asset.json";
 import logoGaneiTikva from "@/assets/clients/ganei-tikva.png.asset.json";
 import logoKiryatOno from "@/assets/clients/kiryat-ono.png.asset.json";
@@ -266,19 +267,19 @@ function Header() {
   ];
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/95 border-b border-border">
-      {/* Compact centered brand */}
+      {/* Wide transparent brand banner — no white card */}
       <a
         href="#top"
         aria-label="TAYAR TECH — דף הבית"
         className="block w-full"
       >
-        <div className="flex items-center justify-center px-4 pt-3 pb-1">
+        <div className="mx-auto flex items-center justify-center px-4 pt-3 pb-2 max-w-6xl">
           <img
-            src={logoAsset.url}
+            src={logoHorizontal.url}
             alt="TAYAR TECH — טייאר טכנולוגיות צנרת"
-            className="h-16 sm:h-20 md:h-24 w-auto object-contain"
-            width={260}
-            height={130}
+            className="w-[78%] max-w-[880px] h-auto object-contain"
+            width={1600}
+            height={680}
             fetchPriority="high"
           />
         </div>
