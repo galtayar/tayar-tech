@@ -266,14 +266,14 @@ function Header() {
     { href: "#faq", label: "שאלות נפוצות" },
   ];
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-md bg-background/95 border-b border-border">
-      {/* Wide transparent brand banner — no white card */}
+    <header className="relative z-40 bg-background/95 border-b border-border">
+      {/* Wide transparent brand banner — slim strip */}
       <a
         href="#top"
         aria-label="TAYAR TECH — דף הבית"
         className="block w-full"
       >
-        <div className="mx-auto flex items-center justify-center px-4 pt-3 pb-2 max-w-6xl">
+        <div className="mx-auto flex items-center justify-center px-4 pt-1 pb-1 max-w-6xl">
           <img
             src={logoHorizontal.url}
             alt="TAYAR TECH — טייאר טכנולוגיות צנרת"
@@ -286,7 +286,8 @@ function Header() {
       </a>
 
       {/* Navigation row */}
-      <div className="container-section flex items-center justify-between h-14">
+      <div className="container-section flex items-center justify-between h-11">
+
         <nav className="hidden lg:flex items-center gap-7">
           {links.map((l) => (
             <a
