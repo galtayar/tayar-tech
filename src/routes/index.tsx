@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/accordion";
 import heroImage from "@/assets/hero-pipe-cutaway.jpg";
 import logoAsset from "@/assets/tayar-tech-logo.png.asset.json";
+import logoHorizontal from "@/assets/tayar-tech-logo-horizontal.png.asset.json";
 import galProfile from "@/assets/gal-profile.jpg.asset.json";
 import logoGaneiTikva from "@/assets/clients/ganei-tikva.png.asset.json";
 import logoKiryatOno from "@/assets/clients/kiryat-ono.png.asset.json";
