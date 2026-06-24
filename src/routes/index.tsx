@@ -266,19 +266,19 @@ function Header() {
   ];
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/95 border-b border-border">
-      {/* Full-width brand banner — TAYAR TECH logo as primary visual identity */}
+      {/* Compact centered brand */}
       <a
         href="#top"
         aria-label="TAYAR TECH — דף הבית"
-        className="block w-full border-b border-border/60 bg-gradient-to-b from-secondary/30 via-background to-background"
+        className="block w-full"
       >
-        <div className="flex items-center justify-center px-4 py-8 md:py-12">
+        <div className="flex items-center justify-center px-4 pt-3 pb-1">
           <img
             src={logoAsset.url}
             alt="TAYAR TECH — טייאר טכנולוגיות צנרת"
-            className="h-32 sm:h-40 md:h-52 lg:h-60 w-auto object-contain drop-shadow-sm"
-            width={520}
-            height={260}
+            className="h-16 sm:h-20 md:h-24 w-auto object-contain"
+            width={260}
+            height={130}
             fetchPriority="high"
           />
         </div>
