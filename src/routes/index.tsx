@@ -265,17 +265,36 @@ function Header() {
     { href: "#faq", label: "שאלות נפוצות" },
   ];
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-md bg-background/85 border-b border-border">
-      <div className="container-section flex items-center justify-between h-16">
-        <a href="#top" className="flex items-center gap-2">
+    <header className="sticky top-0 z-40 backdrop-blur-md bg-background/90 border-b border-border">
+      {/* Full-width brand strip — TAYAR TECH front and center */}
+      <a
+        href="#top"
+        className="block w-full border-b border-border/60 bg-gradient-to-l from-background via-secondary/40 to-background"
+      >
+        <div className="container-section flex items-center justify-center gap-4 py-3 md:py-4">
           <img
             src={logoAsset.url}
             alt="TAYAR TECH — טייאר טכנולוגיות צנרת"
-            className="h-10 w-auto"
-            width={120}
-            height={40}
+            className="h-12 md:h-16 w-auto"
+            width={180}
+            height={60}
           />
-        </a>
+          <div className="flex flex-col items-start leading-tight">
+            <span
+              className="text-2xl md:text-4xl font-extrabold tracking-[0.18em] text-primary"
+              style={{ fontFamily: "Rubik, Heebo, sans-serif" }}
+            >
+              TAYAR TECH
+            </span>
+            <span className="hidden sm:block text-[11px] md:text-sm font-medium text-muted-foreground tracking-wide">
+              טייאר טכנולוגיות צנרת · שיקום צנרת ללא הרס
+            </span>
+          </div>
+        </div>
+      </a>
+
+      {/* Navigation row */}
+      <div className="container-section flex items-center justify-between h-14">
         <nav className="hidden lg:flex items-center gap-7">
           {links.map((l) => (
             <a
@@ -290,7 +309,7 @@ function Header() {
         <a
           href={`tel:${PHONE_TEL}`}
           onClick={() => trackConversion("call", "header")}
-          className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-semibold text-sm hover:bg-primary-glow transition-colors shadow-card-soft"
+          className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-semibold text-sm hover:bg-primary-glow transition-colors shadow-card-soft mr-auto"
         >
           <Phone className="w-4 h-4" />
           {PHONE}
@@ -298,7 +317,7 @@ function Header() {
         <button
           aria-label="פתח תפריט"
           onClick={() => setOpen(!open)}
-          className="lg:hidden p-2 rounded-md hover:bg-muted"
+          className="lg:hidden p-2 rounded-md hover:bg-muted mr-auto"
         >
           <div className="w-5 h-0.5 bg-foreground mb-1" />
           <div className="w-5 h-0.5 bg-foreground mb-1" />
