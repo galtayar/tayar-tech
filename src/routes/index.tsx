@@ -37,6 +37,7 @@ const logoNesher = { url: "/clients/nesher.png" };
 const logoYakir = { url: "/clients/yakir.png" };
 const logoMeatbar = { url: "/clients/meatbar.jpg" };
 const logoOved = { url: "/clients/oved.png" };
+const logoHorizontal = { url: "/logo.png" };
 
 const PHONE = "052-5718085";
 const PHONE_TEL = "+972525718085";
