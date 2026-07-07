@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { absoluteUrl, SITE_URL } from "@/lib/seo";
 import {
   Phone,
   MessageCircle,
