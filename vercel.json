@@ -1,12 +1,4 @@
 {
   "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.tayar-tech.co.il" }],
-      "destination": "https://tayar-tech.co.il/:path*",
-      "permanent": true
-    }
-  ]
+  "installCommand": "npm install"
 }
