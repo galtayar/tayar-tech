@@ -100,7 +100,7 @@ export const Route = createFileRoute("/")({
         content:
           "שיקום ותיקון צנרת ללא הרס — שיטת פאץ׳ ושרוול, צילום קווי ביוב 360°. מעל 12 שנות ניסיון.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: absoluteUrl("/") },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "TAYAR TECH" },
       { property: "og:locale", content: "he_IL" },
@@ -111,7 +111,7 @@ export const Route = createFileRoute("/")({
         content: "שיקום ותיקון צנרת ללא הרס — פאץ׳, שרוול וצילום קווי ביוב 360°.",
       },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/") }],
     scripts: [
       {
         type: "application/ld+json",
