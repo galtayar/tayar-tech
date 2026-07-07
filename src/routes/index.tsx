@@ -121,11 +121,11 @@ export const Route = createFileRoute("/")({
           "@graph": [
             {
               "@type": "Organization",
-              "@id": "#organization",
+              "@id": absoluteUrl("/#organization"),
               name: "TAYAR TECH — טייאר טכנולוגיות צנרת",
               alternateName: ["טייאר טכנולוגיות צנרת", "טייאר אינסטלציה ושירותי ביובית"],
-              url: "/",
-              logo: "/",
+              url: absoluteUrl("/"),
+              logo: absoluteUrl("/logo.png"),
               telephone: "+972525718085",
               sameAs: [
                 "https://www.facebook.com/tayargal/",
@@ -136,9 +136,10 @@ export const Route = createFileRoute("/")({
             },
             {
               "@type": ["LocalBusiness", "Plumber"],
-              "@id": "#localbusiness",
+              "@id": absoluteUrl("/#localbusiness"),
               name: "TAYAR TECH — טייאר טכנולוגיות צנרת",
-              image: "/",
+              url: absoluteUrl("/"),
+              image: absoluteUrl("/logo.png"),
               description:
                 "שיקום ותיקון צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול (CIPP) וצילום קווי ביוב 360°. מעל 12 שנות ניסיון, מוסמכי STS.",
               telephone: "+972525718085",
@@ -196,17 +197,17 @@ export const Route = createFileRoute("/")({
               name: s.name,
               description: s.desc,
               serviceType: s.name,
-              provider: { "@id": "#localbusiness" },
+              provider: { "@id": absoluteUrl("/#localbusiness") },
               areaServed: { "@type": "AdministrativeArea", name: "אזור המרכז, ישראל" },
             })),
             {
               "@type": "BreadcrumbList",
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "דף הבית", item: "/" },
-                { "@type": "ListItem", position: 2, name: "שירותים", item: "/#services" },
-                { "@type": "ListItem", position: 3, name: "אודות", item: "/#about" },
-                { "@type": "ListItem", position: 4, name: "שאלות נפוצות", item: "/#faq" },
-                { "@type": "ListItem", position: 5, name: "צור קשר", item: "/#contact" },
+                { "@type": "ListItem", position: 1, name: "דף הבית", item: absoluteUrl("/") },
+                { "@type": "ListItem", position: 2, name: "שירותים", item: absoluteUrl("/#services") },
+                { "@type": "ListItem", position: 3, name: "אודות", item: absoluteUrl("/#about") },
+                { "@type": "ListItem", position: 4, name: "שאלות נפוצות", item: absoluteUrl("/#faq") },
+                { "@type": "ListItem", position: 5, name: "צור קשר", item: absoluteUrl("/#contact") },
               ],
             },
             {
