@@ -85,6 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "TAYAR TECH — טכנולוגיות צנרת מתקדמות. שיקום ותיקון צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול, צילום ושטיפת קווי ביוב. מעל 12 שנות ניסיון.",
       },
       { name: "author", content: "TAYAR TECH" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
       { property: "og:title", content: "TAYAR TECH | שיקום צנרת ללא הרס, תיקון פאץ׳ וצילום קווי ביוב" },
       {
         property: "og:description",
@@ -96,11 +97,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "TAYAR TECH" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "TAYAR TECH | שיקום צנרת ללא הרס, תיקון פאץ׳ וצילום קווי ביוב" },
-      { name: "description", content: "Speak Hebrew Freely is a website for Tayar Tech, a company specializing in advanced pipe repair and rehabilitation." },
-      { property: "og:description", content: "Speak Hebrew Freely is a website for Tayar Tech, a company specializing in advanced pipe repair and rehabilitation." },
-      { name: "twitter:description", content: "Speak Hebrew Freely is a website for Tayar Tech, a company specializing in advanced pipe repair and rehabilitation." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/teZFO1DOyMf0fA0gPT1zcP09v522/social-images/social-1782238787737-ChatGPT_Image_Jun_7,_2026,_09_22_39_PM.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/teZFO1DOyMf0fA0gPT1zcP09v522/social-images/social-1782238787737-ChatGPT_Image_Jun_7,_2026,_09_22_39_PM.webp" },
+      {
+        name: "twitter:description",
+        content:
+          "שיקום ותיקון צנרת ללא הרס — פאץ׳, שרוול וצילום קווי ביוב. מעל 12 שנות ניסיון.",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -116,24 +117,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "LocalBusiness",
+          "@type": "WebSite",
+          "@id": "https://tayar-tech.co.il/#website",
+          url: "https://tayar-tech.co.il/",
           name: "TAYAR TECH — טייאר טכנולוגיות צנרת",
-          alternateName: "טייאר טכנולוגיות צנרת",
-          description:
-            "שיקום ותיקון צנרת ללא הרס, תיקון פאץ׳, שיטת שרוול וצילום קווי ביוב — מעל 12 שנות ניסיון.",
-          telephone: "+972525718085",
-          sameAs: ["https://www.facebook.com/tayargal/"],
-          areaServed: [
-            "קריית אונו","גני תקווה","פתח תקווה","גבעת שמואל","יהוד",
-            "אור יהודה","סביון","רמת גן","תל אביב","ראשון לציון","חולון","בת ים","בקעת אונו","אזור המרכז",
-          ],
-          address: { "@type": "PostalAddress", addressCountry: "IL", addressRegion: "מרכז" },
-          founder: { "@type": "Person", name: "גל טייאר" },
-          knowsAbout: [
-            "שיקום צנרת ללא הרס","תיקון צנרת ללא חפירה","תיקון פאץ׳","שיטת שרוול CIPP",
-            "צילום קווי ביוב","שטיפת קווי ביוב","שיקום מערכות ביוב","חידוש צנרת",
-          ],
-          aggregateRating: { "@type": "AggregateRating", ratingValue: "5", reviewCount: "20" },
+          inLanguage: "he-IL",
+          publisher: { "@id": "https://tayar-tech.co.il/#organization" },
         }),
       },
     ],
