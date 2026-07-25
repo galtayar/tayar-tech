@@ -179,11 +179,6 @@ export const Route = createFileRoute("/")({
                 "שיטת שרוול CIPP","צילום קווי ביוב","שטיפת קווי ביוב",
                 "שיקום מערכות ביוב","חידוש צנרת","צילום צנרת 360",
               ],
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "5",
-                reviewCount: "20",
-              },
             },
             ...[
               { name: "שיקום צנרת ללא הרס", desc: "שיקום פנימי מלא של מערכת הצנרת — בלי לשבור קירות, רצפות או ריצוף." },
@@ -645,7 +640,7 @@ function About() {
 /* ---------- Why Us ---------- */
 function WhyUs() {
   const items = [
-    { icon: Award, title: "12+ שנות ניסיון", text: "ניסיון מוכח באלפי פרויקטים מורכבים." },
+    { icon: Award, title: "12+ שנות ניסיון", text: "ניסיון מוכח בפרויקטים מורכבים לפרטיים, ועדי בתים, חברות ניהול ורשויות." },
     { icon: GraduationCap, title: "הסמכת תכנון אינסטלציה", text: "תכנון מערכות מים וביוב לפי תקן." },
     { icon: ShieldCheck, title: "מוסמכי STS", text: "הסמכה לתיקוני צנרת ללא הרס." },
     { icon: Camera, title: "מצלמות 360°", text: "אבחון מדויק בקווי ביוב וצנרת." },
@@ -781,92 +776,55 @@ function Clients() {
   );
 }
 
-/* ---------- Testimonials ---------- */
+/* ---------- Testimonials (Google reviews CTA only) ---------- */
 function Testimonials() {
-  const items = [
-    {
-      name: "רונית כהן",
-      role: "בעלת דירה, רמת גן",
-      text: "צוות מקצועי שהציל אותנו מנזילה קשה. אפס לכלוך, אפס שבירות והכל נפתר ביום אחד.",
-    },
-    {
-      name: "אבי לוי",
-      role: "ועד בית, תל אביב",
-      text: "שיקמו לנו קו ביוב ראשי לבניין שלם בלי לפרק חצר. שירות אמין ויחס אישי לכל דייר.",
-    },
-    {
-      name: "מורן דוד",
-      role: "חברת ניהול נכסים",
-      text: "אנחנו עובדים איתם באופן קבוע. תמיד זמינים, תמיד מקצועיים, ותמיד מסיימים בזמן.",
-    },
-  ];
   return (
     <section id="testimonials" className="py-20 lg:py-28 bg-gradient-soft">
       <div className="container-section">
         <SectionHead
-          eyebrow="המלצות לקוחות"
-          title="מה הלקוחות שלנו אומרים"
-          subtitle="עשרות לקוחות פרטיים, ועדי בתים, מוסדות ורשויות סומכים עלינו לאורך השנים."
+          eyebrow="ביקורות אמיתיות"
+          title="הביקורות שלנו — ישירות מגוגל"
+          subtitle="אנחנו מציגים אך ורק ביקורות אמיתיות מכרטיס העסק שלנו ב-Google. לחצו כדי לקרוא את כל הביקורות ולהתרשם בעצמכם."
         />
-        <div className="flex items-center justify-center gap-2 mt-6 mb-2">
-          <div className="flex gap-0.5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="w-5 h-5 fill-yellow-400 stroke-yellow-400" />
-            ))}
-          </div>
-          <span className="font-bold text-foreground">5.0</span>
-          <span className="text-sm text-muted-foreground">דירוג Google</span>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6 mt-10">
-          {items.map((t) => (
-            <figure
-              key={t.name}
-              className="bg-card border border-border rounded-2xl p-7 shadow-card-soft relative"
-            >
-              <Quote className="absolute top-5 left-5 w-8 h-8 text-primary/15" />
-              <div className="flex gap-0.5 mb-3" aria-label="דירוג 5 כוכבים">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-yellow-400 stroke-yellow-400" />
-                ))}
-              </div>
-              <blockquote className="text-foreground leading-relaxed mb-5">
-                „{t.text}”
-              </blockquote>
-              <figcaption>
-                <div className="font-bold">{t.name}</div>
-                <div className="text-sm text-muted-foreground">{t.role}</div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={GOOGLE_REVIEWS_URL}
-            target="_blank"
-            rel="noopener"
-            onClick={() => trackConversion("google_reviews", "testimonials_view")}
-            className="inline-flex items-center justify-center gap-2 bg-card border border-border px-5 py-3.5 rounded-xl font-semibold text-foreground hover:shadow-card-soft transition-shadow min-h-[48px]"
-          >
-            <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
+        <div className="mt-10 max-w-2xl mx-auto bg-card border border-border rounded-3xl shadow-elegant p-8 lg:p-10 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-5">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
               <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
               <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.83z" />
               <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.83C6.71 7.31 9.14 5.38 12 5.38z" />
             </svg>
-            צפו בביקורות שלנו בגוגל
-          </a>
-          <a
-            href={GOOGLE_REVIEWS_URL}
-            target="_blank"
-            rel="noopener"
-            onClick={() => trackConversion("google_reviews", "testimonials_leave")}
-            className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3.5 rounded-xl font-semibold hover:bg-primary-glow shadow-glow transition-colors min-h-[48px]"
-          >
-            <Star className="w-4 h-4 fill-current" />
-            השאירו לנו ביקורת בגוגל
-          </a>
+            Google Business Profile
+          </div>
+          <h3 className="text-2xl lg:text-3xl font-extrabold mb-3">
+            לקריאת הביקורות האמיתיות שלנו
+          </h3>
+          <p className="text-muted-foreground leading-relaxed mb-7">
+            כדי לשמור על שקיפות מלאה, איננו מציגים באתר ביקורות שנכתבו על ידינו.
+            כל הביקורות, הדירוגים והתגובות זמינים ישירות בכרטיס העסק שלנו בגוגל.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href={GOOGLE_REVIEWS_URL}
+              target="_blank"
+              rel="noopener"
+              onClick={() => trackConversion("google_reviews", "testimonials_view")}
+              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-4 rounded-xl font-bold hover:bg-primary-glow shadow-glow transition-colors min-h-[52px] w-full sm:w-auto"
+            >
+              <Star className="w-4 h-4 fill-current" />
+              לכל הביקורות שלנו ב-Google
+            </a>
+            <a
+              href={GOOGLE_REVIEWS_URL}
+              target="_blank"
+              rel="noopener"
+              onClick={() => trackConversion("google_reviews", "testimonials_leave")}
+              className="inline-flex items-center justify-center gap-2 bg-card border border-border px-6 py-4 rounded-xl font-semibold text-foreground hover:shadow-card-soft transition-shadow min-h-[52px] w-full sm:w-auto"
+            >
+              השאירו ביקורת בגוגל
+            </a>
+          </div>
         </div>
-
       </div>
     </section>
   );
