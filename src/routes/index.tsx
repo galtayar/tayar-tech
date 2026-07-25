@@ -331,7 +331,7 @@ function Header() {
 
       </div>
       {open && (
-        <div className="lg:hidden border-t border-border bg-background">
+        <div id="mobile-nav" className="lg:hidden border-t border-border bg-background">
           <div className="container-section py-4 flex flex-col gap-3">
             {links.map((l) => (
               <a
