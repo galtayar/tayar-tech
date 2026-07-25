@@ -464,10 +464,30 @@ function Hero() {
           <p className="text-lg md:text-xl text-foreground/80 font-semibold mb-4 max-w-xl leading-relaxed">
             פתרונות מתקדמים לשיקום וחידוש תשתיות מים וביוב
           </p>
-          <p className="text-base text-muted-foreground mb-10 max-w-xl leading-relaxed">
+          <p className="text-base text-muted-foreground mb-6 max-w-xl leading-relaxed">
             צילום קווי ביוב, חידוש צנרת ופתרונות מתקדמים לתשתיות מים וביוב —
             לבתים פרטיים, בניינים, עסקים, חברות ניהול ורשויות מקומיות.
           </p>
+          {/* Service chips — instantly signal expertise areas */}
+          <ul className="flex flex-wrap gap-2 mb-8 max-w-xl" aria-label="תחומי התמחות">
+            {[
+              "שיקום צנרת ללא הרס",
+              "תיקון ללא חפירה",
+              "צילום קווי ביוב 360°",
+              "שיטת שרוול (CIPP)",
+              "תיקון פאץ׳",
+              "חידוש צנרת",
+            ].map((t) => (
+              <li
+                key={t}
+                className="inline-flex items-center gap-1.5 bg-card border border-border rounded-full px-3 py-1.5 text-xs font-semibold text-foreground/80"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                {t}
+              </li>
+            ))}
+          </ul>
+
           <div className="flex flex-col sm:flex-row gap-3">
             <a
               href={`tel:${PHONE_TEL}`}
