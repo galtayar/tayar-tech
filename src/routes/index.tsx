@@ -318,14 +318,17 @@ function Header() {
           {PHONE}
         </a>
         <button
-          aria-label="פתח תפריט"
+          aria-label={open ? "סגור תפריט" : "פתח תפריט"}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
           onClick={() => setOpen(!open)}
-          className="lg:hidden p-2 rounded-md hover:bg-muted mr-auto"
+          className="lg:hidden p-2 rounded-md hover:bg-muted mr-auto min-h-11 min-w-11 flex flex-col items-center justify-center"
         >
-          <div className="w-5 h-0.5 bg-foreground mb-1" />
-          <div className="w-5 h-0.5 bg-foreground mb-1" />
-          <div className="w-5 h-0.5 bg-foreground" />
+          <span className="w-5 h-0.5 bg-foreground mb-1" />
+          <span className="w-5 h-0.5 bg-foreground mb-1" />
+          <span className="w-5 h-0.5 bg-foreground" />
         </button>
+
       </div>
       {open && (
         <div className="lg:hidden border-t border-border bg-background">
