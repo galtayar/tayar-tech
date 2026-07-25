@@ -219,7 +219,14 @@ export const Route = createFileRoute("/")({
                 { q: "האם חייבים לחפור או לשבור קירות?", a: "לא. כל העבודה מתבצעת דרך פתחי גישה קיימים — ללא חפירות, ללא שבירת קירות ורצפות וללא נזק להחזרת המצב לקדמותו." },
                 { q: "כמה זמן נמשך התהליך?", a: "רוב תיקוני הפאץ׳ מתבצעים תוך מספר שעות באותו היום. שיקום מלא בשיטת שרוול לבניין אורך בדרך כלל בין יום אחד לכמה ימי עבודה." },
                 { q: "מתי מומלץ לבצע צילום קווי ביוב?", a: "מומלץ לפני רכישת נכס, לאחר סתימות חוזרות, כשמופיעות נזילות לא מוסברות, או כתחזוקה תקופתית למבני מגורים, ועדי בתים, מוסדות ועסקים." },
+                { q: "מה תוחלת החיים של שיקום בשיטת שרוול?", a: "שרוול CIPP איכותי מתוכנן לתוחלת חיים של 50 שנה ומעלה — עמיד לשחיקה, לחומרים כימיים, לשורשים ולסתימות, ומחזיר את הקו לתפקוד מלא." },
+                { q: "האם הטכנולוגיה מתאימה לכל סוגי הצנרת?", a: "כן. שיטות הפאץ׳ והשרוול מתאימות לצנרת ברזל, חרסינה, PVC, בטון ופלדה — בקטרים ובאורכים שונים. איבחון מוקדם באמצעות מצלמה קובע את הפתרון האופטימלי." },
+                { q: "מה כוללת הצעת המחיר?", a: "הצעת מחיר שקופה וסופית הכוללת: אבחון וצילום ראשוני, ביצוע השיקום, חומרים, ציוד, כוח אדם ואחריות מלאה. אין תוספות סמויות." },
+                { q: "האם ניתן אחריות על העבודה?", a: "כן. אנו מעניקים אחריות מלאה בכתב על השיקום ועל החומרים בהתאם לסוג העבודה — עד עשרות שנים בשיטת שרוול CIPP." },
+                { q: "האם אתם עובדים עם ועדי בתים וחברות ניהול?", a: "בהחלט. TAYAR TECH מבצעת פרויקטים לבניינים משותפים, ועדי בתים וחברות ניהול נכסים — כולל תיאום מסודר, הצעה לאסיפת דיירים וביצוע עם מינימום הפרעה." },
+                { q: "כמה זמן לוקח להגיע לקריאת שירות?", a: "לקריאות דחופות אנו משתדלים להגיע באותו היום או ביום העסקים הבא באזור המרכז. לפרויקטים מתוכננים נקבע לוח זמנים מדויק מראש." },
               ].map((f) => ({
+
                 "@type": "Question",
                 name: f.q,
                 acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -311,17 +318,20 @@ function Header() {
           {PHONE}
         </a>
         <button
-          aria-label="פתח תפריט"
+          aria-label={open ? "סגור תפריט" : "פתח תפריט"}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
           onClick={() => setOpen(!open)}
-          className="lg:hidden p-2 rounded-md hover:bg-muted mr-auto"
+          className="lg:hidden p-2 rounded-md hover:bg-muted mr-auto min-h-11 min-w-11 flex flex-col items-center justify-center"
         >
-          <div className="w-5 h-0.5 bg-foreground mb-1" />
-          <div className="w-5 h-0.5 bg-foreground mb-1" />
-          <div className="w-5 h-0.5 bg-foreground" />
+          <span className="w-5 h-0.5 bg-foreground mb-1" />
+          <span className="w-5 h-0.5 bg-foreground mb-1" />
+          <span className="w-5 h-0.5 bg-foreground" />
         </button>
+
       </div>
       {open && (
-        <div className="lg:hidden border-t border-border bg-background">
+        <div id="mobile-nav" className="lg:hidden border-t border-border bg-background">
           <div className="container-section py-4 flex flex-col gap-3">
             {links.map((l) => (
               <a
@@ -464,10 +474,30 @@ function Hero() {
           <p className="text-lg md:text-xl text-foreground/80 font-semibold mb-4 max-w-xl leading-relaxed">
             פתרונות מתקדמים לשיקום וחידוש תשתיות מים וביוב
           </p>
-          <p className="text-base text-muted-foreground mb-10 max-w-xl leading-relaxed">
+          <p className="text-base text-muted-foreground mb-6 max-w-xl leading-relaxed">
             צילום קווי ביוב, חידוש צנרת ופתרונות מתקדמים לתשתיות מים וביוב —
             לבתים פרטיים, בניינים, עסקים, חברות ניהול ורשויות מקומיות.
           </p>
+          {/* Service chips — instantly signal expertise areas */}
+          <ul className="flex flex-wrap gap-2 mb-8 max-w-xl" aria-label="תחומי התמחות">
+            {[
+              "שיקום צנרת ללא הרס",
+              "תיקון ללא חפירה",
+              "צילום קווי ביוב 360°",
+              "שיטת שרוול (CIPP)",
+              "תיקון פאץ׳",
+              "חידוש צנרת",
+            ].map((t) => (
+              <li
+                key={t}
+                className="inline-flex items-center gap-1.5 bg-card border border-border rounded-full px-3 py-1.5 text-xs font-semibold text-foreground/80"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                {t}
+              </li>
+            ))}
+          </ul>
+
           <div className="flex flex-col sm:flex-row gap-3">
             <a
               href={`tel:${PHONE_TEL}`}
@@ -896,6 +926,9 @@ function FAQ() {
     { q: "האם אתם עובדים עם ועדי בתים?", a: "בהחלט. אנו מבצעים שיקום צנרת וקווי ביוב לבניינים משותפים, כולל תיאום מסודר מול ועד הבית, הצעת מחיר מפורטת לאסיפת דיירים וביצוע מקצועי עם מינימום הפרעה ליום־יום." },
     { q: "האם אתם עובדים עם חברות ניהול?", a: "כן. TAYAR TECH פועלת עם חברות ניהול נכסים מובילות — באחזקה תקופתית, בפרויקטים מתוכננים ובמתן מענה מהיר לקריאות שירות דחופות." },
     { q: "האם אתם עובדים עם עיריות ורשויות מקומיות?", a: "כן. אנו ספקים מאושרים לרשויות מקומיות ועיריות, ובעלי ניסיון בביצוע פרויקטים תשתיתיים לשיקום מערכות מים וביוב בסטנדרט הנדסי גבוה." },
+    { q: "מה תוחלת החיים של שיקום בשיטת שרוול?", a: "שרוול CIPP איכותי מתוכנן לתוחלת חיים של 50 שנה ומעלה — עמיד לשחיקה, לחומרים כימיים, לשורשים ולסתימות, ומחזיר את הקו לתפקוד מלא כמו חדש." },
+    { q: "האם הטכנולוגיה מתאימה לכל סוגי הצנרת?", a: "כן. שיטות הפאץ׳ והשרוול מתאימות לצנרת ברזל, חרסינה, PVC, בטון ופלדה — בקטרים ובאורכים שונים. איבחון מוקדם באמצעות מצלמה קובע את הפתרון האופטימלי לכל מקרה." },
+    { q: "מה כוללת הצעת המחיר ואיזו אחריות אתם נותנים?", a: "אנו מספקים הצעת מחיר שקופה וסופית — אבחון וצילום, ביצוע, חומרים, ציוד ואחריות מלאה בכתב, ללא תוספות סמויות. משך האחריות משתנה לפי סוג העבודה, ומגיע לעשרות שנים בשיטת שרוול CIPP." },
   ];
   return (
     <section id="faq" className="py-20 lg:py-28 bg-gradient-soft">
@@ -916,6 +949,7 @@ function FAQ() {
             </AccordionItem>
           ))}
         </Accordion>
+
       </div>
     </section>
   );
