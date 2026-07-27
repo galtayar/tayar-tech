@@ -260,36 +260,6 @@ function HomePage() {
     </div>
   );
 }
-          ],
-        }),
-      },
-    ],
-  }),
-  component: HomePage,
-});
-
-
-function HomePage() {
-  return (
-    <div className="min-h-screen bg-background text-foreground pb-24 md:pb-0" dir="rtl">
-      <Header />
-      <main>
-        <Hero />
-        <Stats />
-        <About />
-        <WhyUs />
-        <Services />
-        <Clients />
-        <Testimonials />
-        <ServiceAreas />
-        <FAQ />
-        <CTA />
-      </main>
-      <Footer />
-      <FloatingButtons />
-    </div>
-  );
-}
 
 /* ---------- Header ---------- */
 function Header() {
