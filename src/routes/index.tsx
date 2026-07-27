@@ -875,22 +875,79 @@ function ServiceAreas() {
   );
 }
 
+/* ---------- Process ---------- */
+function Process() {
+  const steps = [
+    {
+      icon: Camera,
+      title: "אבחון וצילום",
+      text: "צילום מקצועי של הקו במצלמת 360°, מיפוי מדויק של התקלה והמלצה הנדסית על הפתרון האופטימלי.",
+    },
+    {
+      icon: Waves,
+      title: "הכנת הקו",
+      text: "שטיפה בלחץ גבוה (ג׳טינג) וניקוי פנימי לקבלת שטח נקי, יבש ומוכן לביצוע השיקום.",
+    },
+    {
+      icon: Layers,
+      title: "ביצוע השיקום",
+      text: "התקנת פאץ׳ נקודתי או שרוול CIPP פנימי — ללא שבירת קירות, ללא חפירות וללא נזק לנכס.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "בקרה ואחריות",
+      text: "צילום סופי לבקרת איכות, מסירת תיעוד לפני/אחרי ומתן אחריות בכתב על העבודה והחומרים.",
+    },
+  ];
+  return (
+    <section id="process" className="py-20 lg:py-28">
+      <div className="container-section">
+        <SectionHead
+          eyebrow="תהליך העבודה"
+          title="4 שלבים הנדסיים — שקוף, מדויק, ללא הרס"
+          subtitle="שיטת עבודה סדורה המבוססת על אבחון מקדים, ציוד מתקדם ובקרת איכות מלאה בסיום."
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-14">
+          {steps.map((s, i) => (
+            <div
+              key={s.title}
+              className="relative bg-card border border-border rounded-2xl p-6 hover:shadow-elegant transition-all"
+            >
+              <div className="absolute top-4 left-4 text-xs font-extrabold text-primary/40">
+                0{i + 1}
+              </div>
+              <div className="w-12 h-12 rounded-xl bg-gradient-primary grid place-items-center mb-4 shadow-card-soft">
+                <s.icon className="w-6 h-6 text-primary-foreground" />
+              </div>
+              <h3 className="font-bold text-lg mb-2">{s.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{s.text}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Trust badges strip — professional authority reinforcement */}
+        <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 bg-card border border-border rounded-2xl p-5 shadow-card-soft">
+          {[
+            { icon: Cpu, label: "טכנולוגיה אירופאית" },
+            { icon: ShieldCheck, label: "אחריות מקצועית בכתב" },
+            { icon: Zap, label: "ביצוע ללא הרס" },
+            { icon: Building2, label: "לקוחות עסקיים ורשויות" },
+          ].map((b) => (
+            <div key={b.label} className="flex items-center gap-3 px-3 py-2">
+              <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary grid place-items-center shrink-0">
+                <b.icon className="w-5 h-5" />
+              </div>
+              <div className="text-xs md:text-sm font-semibold leading-snug">{b.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- FAQ ---------- */
 function FAQ() {
-  const faqs = [
-    { q: "מהו שיקום צנרת ללא הרס?", a: "שיקום צנרת ללא הרס הוא פתרון טכנולוגי מתקדם המאפשר להחזיר צנרת ישנה ופגומה למצב חדש — מבלי לשבור קירות, רצפות או חפירות בחצר. השיקום מתבצע מתוך הצנרת באמצעות שיטות פאץ׳ או שרוול (CIPP)." },
-    { q: "מהו תיקון פאץ׳?", a: "תיקון פאץ׳ הוא טיפול נקודתי בקטע פגום בצנרת — סדק, חור או חיבור דולף. מותקנת ׳טבעת׳ אפוקסי פנימית באורך של עד מטר אשר אוטמת לחלוטין את הקטע הפגום ומחזירה את הצנרת לשימוש מלא." },
-    { q: "מהו שיקום צנרת בשיטת שרוול (CIPP)?", a: "שיטת השרוול (Cured In Place Pipe) יוצרת ׳צינור בתוך צינור׳: שרוול רך ספוג ברזין אפוקסי מוחדר לתוך הקו הקיים ומתקשה למצב מוצק לאחר חימום. התוצאה — קו חדש לחלוטין, חלק, עמיד וללא תפרים, לעשרות שנים." },
-    { q: "האם חייבים לחפור או לשבור קירות?", a: "לא. זהו בדיוק היתרון של הטכנולוגיה. כל העבודה מתבצעת דרך פתחי גישה קיימים — ללא חפירות, ללא שבירת קירות ורצפות וללא נזק להחזרת המצב לקדמותו." },
-    { q: "כמה זמן נמשך התהליך?", a: "רוב תיקוני הפאץ׳ מתבצעים תוך מספר שעות באותו היום. שיקום מלא בשיטת שרוול לבניין אורך בדרך כלל בין יום אחד לכמה ימי עבודה — תלוי באורך ובמורכבות הקו." },
-    { q: "מתי מומלץ לבצע צילום קווי ביוב?", a: "מומלץ לבצע צילום קווי ביוב לפני רכישת נכס, לאחר סתימות חוזרות, כשמופיעות נזילות לא מוסברות, או כתחזוקה תקופתית למבני מגורים, ועדי בתים, מוסדות ועסקים." },
-    { q: "האם אתם עובדים עם ועדי בתים?", a: "בהחלט. אנו מבצעים שיקום צנרת וקווי ביוב לבניינים משותפים, כולל תיאום מסודר מול ועד הבית, הצעת מחיר מפורטת לאסיפת דיירים וביצוע מקצועי עם מינימום הפרעה ליום־יום." },
-    { q: "האם אתם עובדים עם חברות ניהול?", a: "כן. TAYAR TECH פועלת עם חברות ניהול נכסים מובילות — באחזקה תקופתית, בפרויקטים מתוכננים ובמתן מענה מהיר לקריאות שירות דחופות." },
-    { q: "האם אתם עובדים עם עיריות ורשויות מקומיות?", a: "כן. אנו ספקים מאושרים לרשויות מקומיות ועיריות, ובעלי ניסיון בביצוע פרויקטים תשתיתיים לשיקום מערכות מים וביוב בסטנדרט הנדסי גבוה." },
-    { q: "מה תוחלת החיים של שיקום בשיטת שרוול?", a: "שרוול CIPP איכותי מתוכנן לתוחלת חיים של 50 שנה ומעלה — עמיד לשחיקה, לחומרים כימיים, לשורשים ולסתימות, ומחזיר את הקו לתפקוד מלא כמו חדש." },
-    { q: "האם הטכנולוגיה מתאימה לכל סוגי הצנרת?", a: "כן. שיטות הפאץ׳ והשרוול מתאימות לצנרת ברזל, חרסינה, PVC, בטון ופלדה — בקטרים ובאורכים שונים. איבחון מוקדם באמצעות מצלמה קובע את הפתרון האופטימלי לכל מקרה." },
-    { q: "מה כוללת הצעת המחיר ואיזו אחריות אתם נותנים?", a: "אנו מספקים הצעת מחיר שקופה וסופית — אבחון וצילום, ביצוע, חומרים, ציוד ואחריות מלאה בכתב, ללא תוספות סמויות. משך האחריות משתנה לפי סוג העבודה, ומגיע לעשרות שנים בשיטת שרוול CIPP." },
-  ];
   return (
     <section id="faq" className="py-20 lg:py-28 bg-gradient-soft">
       <div className="container-section max-w-3xl">
@@ -899,7 +956,7 @@ function FAQ() {
           title="כל מה שצריך לדעת על שיקום צנרת מתקדם"
         />
         <Accordion type="single" collapsible className="mt-12">
-          {faqs.map((f, i) => (
+          {FAQ_ITEMS.map((f, i) => (
             <AccordionItem key={i} value={`item-${i}`} className="bg-card border border-border rounded-2xl mb-3 px-5 shadow-card-soft data-[state=open]:shadow-elegant">
               <AccordionTrigger className="text-right font-bold text-base hover:no-underline">
                 {f.q}
@@ -910,7 +967,6 @@ function FAQ() {
             </AccordionItem>
           ))}
         </Accordion>
-
       </div>
     </section>
   );
