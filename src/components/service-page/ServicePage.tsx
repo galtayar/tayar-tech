@@ -53,6 +53,8 @@ export type ServicePageData = {
   sections: Section[];
   methodsAfter?: number; // render method cards after this section index
   faq: { q: string; a: string }[];
+  articles?: { slug: string; title: string }[];
+  articlesHeading?: string;
 };
 
 export function buildServiceHead(d: ServicePageData) {
@@ -125,7 +127,7 @@ function track(action: "call" | "whatsapp", location: string) {
   });
 }
 
-function CtaButtons({ location }: { location: string }) {
+export function CtaButtons({ location }: { location: string }) {
   return (
     <div className="flex flex-col sm:flex-row gap-3">
       <a
@@ -152,20 +154,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
   const related = SERVICE_LINKS.filter((s) => s.to !== data.slug);
   return (
     <div className="min-h-screen bg-background text-foreground pb-24 md:pb-0" dir="rtl">
-      <header className="border-b border-border bg-background/95">
-        <div className="container-section flex items-center justify-between gap-4 py-2">
-          <Link to="/" aria-label="TAYAR TECH — דף הבית" className="block">
-            <img src="/logo.png" alt="TAYAR TECH — טייאר טכנולוגיות צנרת" className="h-12 sm:h-14 w-auto object-contain" width={1600} height={680} />
-          </Link>
-          <a
-            href={`tel:${PHONE_TEL}`}
-            onClick={() => track("call", "service_header")}
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-semibold text-sm hover:bg-primary-glow transition-colors min-h-11"
-          >
-            <Phone className="w-4 h-4" /> <span className="hidden sm:inline">{PHONE}</span><span className="sm:hidden">התקשרו</span>
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main>
         <section className="bg-gradient-soft border-b border-border">
@@ -279,6 +268,21 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             </Accordion>
           </section>
 
+          {data.articles && data.articles.length > 0 && (
+            <section aria-labelledby="kb-h">
+              <h2 id="kb-h" className="text-2xl lg:text-3xl font-extrabold mb-4">{data.articlesHeading ?? "מידע נוסף"}</h2>
+              <ul className="space-y-2">
+                {data.articles.map((a) => (
+                  <li key={a.slug}>
+                    <Link to="/knowledge/$slug" params={{ slug: a.slug }} className="inline-flex items-center gap-1 font-semibold text-primary hover:underline underline-offset-4">
+                      <ChevronLeft className="w-4 h-4" aria-hidden="true" /> {a.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {data.methodsAfter === undefined && <RelatedCards items={related} heading="שירותים נוספים" />}
 
           <section className="bg-gradient-primary text-primary-foreground rounded-3xl p-8 text-center">
@@ -289,28 +293,9 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         </div>
       </main>
 
-      <footer className="border-t border-border bg-card">
-        <div className="container-section py-8 flex flex-col md:flex-row gap-6 justify-between text-sm">
-          <nav aria-label="שירותים">
-            <ul className="flex flex-wrap gap-x-5 gap-y-2">
-              <li><Link to="/" className="hover:text-primary">דף הבית</Link></li>
-              {SERVICE_LINKS.map((s) => (
-                <li key={s.to}><Link to={s.to} className="hover:text-primary">{s.title}</Link></li>
-              ))}
-            </ul>
-          </nav>
-          <div className="text-muted-foreground space-y-1"><p>TAYAR TECH מספקת שירותי תיקון ושיקום צנרת ללא הרס באזור המרכז וגוש דן.</p><p>© {new Date().getFullYear()} TAYAR TECH | טכנולוגיות צנרת מתקדמות — מבית טייאר אינסטלציה ושירותי ביובית</p></div>
-        </div>
-      </footer>
+      <SiteFooter />
 
-      <div className="fixed bottom-4 inset-x-4 z-50 flex gap-3 md:hidden">
-        <a href={`tel:${PHONE_TEL}`} onClick={() => track("call", "floating")} className="flex-1 inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-3 rounded-2xl font-bold shadow-elegant">
-          <Phone className="w-5 h-5" /> התקשרו
-        </a>
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener" onClick={() => track("whatsapp", "floating")} className="flex-1 inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-4 py-3 rounded-2xl font-bold shadow-elegant">
-          <MessageCircle className="w-5 h-5" /> WhatsApp
-        </a>
-      </div>
+      <FloatingCta />
     </div>
   );
 }
@@ -330,5 +315,78 @@ function RelatedCards({ items, heading }: { items: typeof SERVICE_LINKS; heading
         ))}
       </div>
     </section>
+  );
+}
+
+export function SiteHeader() {
+  return (
+  <header className="border-b border-border bg-background/95">
+    <div className="container-section flex items-center justify-between gap-4 py-2">
+      <Link to="/" aria-label="TAYAR TECH — דף הבית" className="block">
+        <img src="/logo.png" alt="TAYAR TECH — טייאר טכנולוגיות צנרת" className="h-12 sm:h-14 w-auto object-contain" width={1600} height={680} />
+      </Link>
+      <a
+        href={`tel:${PHONE_TEL}`}
+        onClick={() => track("call", "service_header")}
+        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-semibold text-sm hover:bg-primary-glow transition-colors min-h-11"
+      >
+        <Phone className="w-4 h-4" /> <span className="hidden sm:inline">{PHONE}</span><span className="sm:hidden">התקשרו</span>
+      </a>
+    </div>
+  </header>
+  );
+}
+
+export function SiteFooter() {
+  return (
+  <footer className="border-t border-border bg-card">
+    <div className="container-section py-8 flex flex-col md:flex-row gap-6 justify-between text-sm">
+      <nav aria-label="שירותים">
+        <ul className="flex flex-wrap gap-x-5 gap-y-2">
+          <li><Link to="/" className="hover:text-primary">דף הבית</Link></li>
+          {SERVICE_LINKS.map((s) => (
+            <li key={s.to}><Link to={s.to} className="hover:text-primary">{s.title}</Link></li>
+          ))}
+          <li><Link to="/knowledge" className="hover:text-primary">מרכז ידע</Link></li>
+        </ul>
+      </nav>
+      <div className="text-muted-foreground space-y-1"><p>TAYAR TECH מספקת שירותי תיקון ושיקום צנרת ללא הרס באזור המרכז וגוש דן.</p><p>© {new Date().getFullYear()} TAYAR TECH | טכנולוגיות צנרת מתקדמות — מבית טייאר אינסטלציה ושירותי ביובית</p></div>
+    </div>
+  </footer>
+  );
+}
+
+export function FloatingCta() {
+  return (
+  <div className="fixed bottom-4 inset-x-4 z-50 flex gap-3 md:hidden">
+    <a href={`tel:${PHONE_TEL}`} onClick={() => track("call", "floating")} className="flex-1 inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-3 rounded-2xl font-bold shadow-elegant">
+      <Phone className="w-5 h-5" /> התקשרו
+    </a>
+    <a href={WHATSAPP_URL} target="_blank" rel="noopener" onClick={() => track("whatsapp", "floating")} className="flex-1 inline-flex items-center justify-center gap-2 bg-success text-success-foreground px-4 py-3 rounded-2xl font-bold shadow-elegant">
+      <MessageCircle className="w-5 h-5" /> WhatsApp
+    </a>
+  </div>
+  );
+}
+
+/** Renders text with [label](/path) links and **bold** markup. */
+export function RichText({ text }: { text: string }) {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g).filter(Boolean);
+  return (
+    <>
+      {parts.map((part, i) => {
+        const m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (m) {
+          return (
+            <Link key={i} to={m[2] as "/"} className="text-primary font-semibold underline underline-offset-4 hover:text-primary-glow">
+              {m[1]}
+            </Link>
+          );
+        }
+        const b = part.match(/^\*\*([^*]+)\*\*$/);
+        if (b) return <strong key={i} className="text-foreground font-semibold">{b[1]}</strong>;
+        return <span key={i}>{part}</span>;
+      })}
+    </>
   );
 }
