@@ -1,3 +1,4 @@
+import { SERVICE_AREAS } from "@/components/service-page/ServicePage";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { absoluteUrl } from "@/lib/seo";
 import {
@@ -166,10 +167,10 @@ export const Route = createFileRoute("/")({
                 addressRegion: "מרכז",
               },
               areaServed: [
-                "קריית אונו","גני תקווה","פתח תקווה","גבעת שמואל","יהוד",
-                "אור יהודה","סביון","רמת גן","תל אביב","ראשון לציון",
-                "חולון","בת ים","בקעת אונו","אזור המרכז",
-              ].map((n) => ({ "@type": "City", name: n })),
+                { "@type": "AdministrativeArea", name: "אזור המרכז" },
+                { "@type": "AdministrativeArea", name: "גוש דן" },
+                ...SERVICE_AREAS.map((n) => ({ "@type": "City", name: n })),
+              ],
               openingHoursSpecification: [
                 {
                   "@type": "OpeningHoursSpecification",
@@ -209,7 +210,10 @@ export const Route = createFileRoute("/")({
               description: s.desc,
               serviceType: s.name,
               provider: { "@id": absoluteUrl("/#localbusiness") },
-              areaServed: { "@type": "AdministrativeArea", name: "אזור המרכז, ישראל" },
+              areaServed: [
+                { "@type": "AdministrativeArea", name: "אזור המרכז" },
+                { "@type": "AdministrativeArea", name: "גוש דן" },
+              ],
             })),
             {
               "@type": "BreadcrumbList",
@@ -845,29 +849,14 @@ function Testimonials() {
 
 /* ---------- Service Areas ---------- */
 function ServiceAreas() {
-  const areas = [
-    "קריית אונו",
-    "גני תקווה",
-    "פתח תקווה",
-    "גבעת שמואל",
-    "יהוד",
-    "אור יהודה",
-    "סביון",
-    "רמת גן",
-    "תל אביב",
-    "ראשון לציון",
-    "חולון",
-    "בת ים",
-    "בקעת אונו",
-    "אזור המרכז",
-  ];
+  const areas = SERVICE_AREAS;
   return (
     <section id="areas" className="py-20 lg:py-28">
       <div className="container-section">
         <SectionHead
           eyebrow="אזורי שירות"
-          title="אזורי השירות שלנו"
-          subtitle="TAYAR TECH פועלת באזור המרכז ובערים הסמוכות — שירות מהיר ומקצועי קרוב אליכם."
+          title="שירותי צנרת מתקדמים בכל אזור המרכז וגוש דן"
+          subtitle="TAYAR TECH מעניקה שירותי צילום, תיקון, שיקום וחידוש צנרת ללא הרס לבתים פרטיים, בניינים, עסקים, חברות ניהול ורשויות באזור המרכז וגוש דן."
         />
         <div className="flex flex-wrap justify-center gap-3 mt-12">
           {areas.map((a) => (
@@ -879,7 +868,14 @@ function ServiceAreas() {
               {a}
             </div>
           ))}
+          <div className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-muted-foreground">והסביבה</div>
         </div>
+        <p className="text-center text-muted-foreground mt-8">
+          למידע על השיטות והתהליך:{" "}
+          <Link to="/tikkun-tzaneret-lelo-heres" className="text-primary font-semibold underline underline-offset-4">
+            תיקון ושיקום צנרת ללא הרס
+          </Link>
+        </p>
       </div>
     </section>
   );
@@ -1139,13 +1135,12 @@ function Footer() {
         <div>
           <h3 className="font-bold mb-3">אזורי שירות</h3>
           <p className="text-muted-foreground leading-relaxed">
-            קריית אונו, גני תקווה, פתח תקווה, גבעת שמואל, יהוד, אור יהודה,
-            סביון, רמת גן, תל אביב, ראשון לציון, חולון, בת ים ואזור המרכז.
+            TAYAR TECH מספקת שירותי תיקון ושיקום צנרת ללא הרס באזור המרכז וגוש דן.
           </p>
         </div>
       </div>
       <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} TAYAR TECH — טייאר טכנולוגיות צנרת. כל הזכויות שמורות.
+        © {new Date().getFullYear()} TAYAR TECH | טכנולוגיות צנרת מתקדמות — מבית טייאר אינסטלציה ושירותי ביובית. כל הזכויות שמורות.
       </div>
     </footer>
   );
