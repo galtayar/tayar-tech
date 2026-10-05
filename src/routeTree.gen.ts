@@ -9,8 +9,32 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TikkunTzaneretLeloHeresRouteImport } from './routes/tikkun-tzaneret-lelo-heres'
+import { Route as SewerCameraInspectionRouteImport } from './routes/sewer-camera-inspection'
+import { Route as PatchPipeRepairRouteImport } from './routes/patch-pipe-repair'
+import { Route as CippPipeReliningRouteImport } from './routes/cipp-pipe-relining'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TikkunTzaneretLeloHeresRoute = TikkunTzaneretLeloHeresRouteImport.update({
+  id: '/tikkun-tzaneret-lelo-heres',
+  path: '/tikkun-tzaneret-lelo-heres',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SewerCameraInspectionRoute = SewerCameraInspectionRouteImport.update({
+  id: '/sewer-camera-inspection',
+  path: '/sewer-camera-inspection',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatchPipeRepairRoute = PatchPipeRepairRouteImport.update({
+  id: '/patch-pipe-repair',
+  path: '/patch-pipe-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CippPipeReliningRoute = CippPipeReliningRouteImport.update({
+  id: '/cipp-pipe-relining',
+  path: '/cipp-pipe-relining',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +43,88 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cipp-pipe-relining': typeof CippPipeReliningRoute
+  '/patch-pipe-repair': typeof PatchPipeRepairRoute
+  '/sewer-camera-inspection': typeof SewerCameraInspectionRoute
+  '/tikkun-tzaneret-lelo-heres': typeof TikkunTzaneretLeloHeresRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cipp-pipe-relining': typeof CippPipeReliningRoute
+  '/patch-pipe-repair': typeof PatchPipeRepairRoute
+  '/sewer-camera-inspection': typeof SewerCameraInspectionRoute
+  '/tikkun-tzaneret-lelo-heres': typeof TikkunTzaneretLeloHeresRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cipp-pipe-relining': typeof CippPipeReliningRoute
+  '/patch-pipe-repair': typeof PatchPipeRepairRoute
+  '/sewer-camera-inspection': typeof SewerCameraInspectionRoute
+  '/tikkun-tzaneret-lelo-heres': typeof TikkunTzaneretLeloHeresRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/cipp-pipe-relining'
+    | '/patch-pipe-repair'
+    | '/sewer-camera-inspection'
+    | '/tikkun-tzaneret-lelo-heres'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cipp-pipe-relining'
+    | '/patch-pipe-repair'
+    | '/sewer-camera-inspection'
+    | '/tikkun-tzaneret-lelo-heres'
+  id:
+    | '__root__'
+    | '/'
+    | '/cipp-pipe-relining'
+    | '/patch-pipe-repair'
+    | '/sewer-camera-inspection'
+    | '/tikkun-tzaneret-lelo-heres'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CippPipeReliningRoute: typeof CippPipeReliningRoute
+  PatchPipeRepairRoute: typeof PatchPipeRepairRoute
+  SewerCameraInspectionRoute: typeof SewerCameraInspectionRoute
+  TikkunTzaneretLeloHeresRoute: typeof TikkunTzaneretLeloHeresRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tikkun-tzaneret-lelo-heres': {
+      id: '/tikkun-tzaneret-lelo-heres'
+      path: '/tikkun-tzaneret-lelo-heres'
+      fullPath: '/tikkun-tzaneret-lelo-heres'
+      preLoaderRoute: typeof TikkunTzaneretLeloHeresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sewer-camera-inspection': {
+      id: '/sewer-camera-inspection'
+      path: '/sewer-camera-inspection'
+      fullPath: '/sewer-camera-inspection'
+      preLoaderRoute: typeof SewerCameraInspectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/patch-pipe-repair': {
+      id: '/patch-pipe-repair'
+      path: '/patch-pipe-repair'
+      fullPath: '/patch-pipe-repair'
+      preLoaderRoute: typeof PatchPipeRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cipp-pipe-relining': {
+      id: '/cipp-pipe-relining'
+      path: '/cipp-pipe-relining'
+      fullPath: '/cipp-pipe-relining'
+      preLoaderRoute: typeof CippPipeReliningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,7 +137,21 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CippPipeReliningRoute: CippPipeReliningRoute,
+  PatchPipeRepairRoute: PatchPipeRepairRoute,
+  SewerCameraInspectionRoute: SewerCameraInspectionRoute,
+  TikkunTzaneretLeloHeresRoute: TikkunTzaneretLeloHeresRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
