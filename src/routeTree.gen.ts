@@ -9,27 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as CippPipeReliningRouteImport } from './routes/cipp-pipe-relining'
-import { Route as PatchPipeRepairRouteImport } from './routes/patch-pipe-repair'
-import { Route as SewerCameraInspectionRouteImport } from './routes/sewer-camera-inspection'
 import { Route as TikkunTzaneretLeloHeresRouteImport } from './routes/tikkun-tzaneret-lelo-heres'
+import { Route as SewerCameraInspectionRouteImport } from './routes/sewer-camera-inspection'
+import { Route as PatchPipeRepairRouteImport } from './routes/patch-pipe-repair'
+import { Route as CippPipeReliningRouteImport } from './routes/cipp-pipe-relining'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as KnowledgeIndexRouteImport } from './routes/knowledge.index'
 import { Route as KnowledgeSlugRouteImport } from './routes/knowledge.$slug'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CippPipeReliningRoute = CippPipeReliningRouteImport.update({
-  id: '/cipp-pipe-relining',
-  path: '/cipp-pipe-relining',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PatchPipeRepairRoute = PatchPipeRepairRouteImport.update({
-  id: '/patch-pipe-repair',
-  path: '/patch-pipe-repair',
+const TikkunTzaneretLeloHeresRoute = TikkunTzaneretLeloHeresRouteImport.update({
+  id: '/tikkun-tzaneret-lelo-heres',
+  path: '/tikkun-tzaneret-lelo-heres',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SewerCameraInspectionRoute = SewerCameraInspectionRouteImport.update({
@@ -37,9 +27,19 @@ const SewerCameraInspectionRoute = SewerCameraInspectionRouteImport.update({
   path: '/sewer-camera-inspection',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TikkunTzaneretLeloHeresRoute = TikkunTzaneretLeloHeresRouteImport.update({
-  id: '/tikkun-tzaneret-lelo-heres',
-  path: '/tikkun-tzaneret-lelo-heres',
+const PatchPipeRepairRoute = PatchPipeRepairRouteImport.update({
+  id: '/patch-pipe-repair',
+  path: '/patch-pipe-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CippPipeReliningRoute = CippPipeReliningRouteImport.update({
+  id: '/cipp-pipe-relining',
+  path: '/cipp-pipe-relining',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KnowledgeIndexRoute = KnowledgeIndexRouteImport.update({
@@ -123,25 +123,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cipp-pipe-relining': {
-      id: '/cipp-pipe-relining'
-      path: '/cipp-pipe-relining'
-      fullPath: '/cipp-pipe-relining'
-      preLoaderRoute: typeof CippPipeReliningRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/patch-pipe-repair': {
-      id: '/patch-pipe-repair'
-      path: '/patch-pipe-repair'
-      fullPath: '/patch-pipe-repair'
-      preLoaderRoute: typeof PatchPipeRepairRouteImport
+    '/tikkun-tzaneret-lelo-heres': {
+      id: '/tikkun-tzaneret-lelo-heres'
+      path: '/tikkun-tzaneret-lelo-heres'
+      fullPath: '/tikkun-tzaneret-lelo-heres'
+      preLoaderRoute: typeof TikkunTzaneretLeloHeresRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sewer-camera-inspection': {
@@ -151,11 +137,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SewerCameraInspectionRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tikkun-tzaneret-lelo-heres': {
-      id: '/tikkun-tzaneret-lelo-heres'
-      path: '/tikkun-tzaneret-lelo-heres'
-      fullPath: '/tikkun-tzaneret-lelo-heres'
-      preLoaderRoute: typeof TikkunTzaneretLeloHeresRouteImport
+    '/patch-pipe-repair': {
+      id: '/patch-pipe-repair'
+      path: '/patch-pipe-repair'
+      fullPath: '/patch-pipe-repair'
+      preLoaderRoute: typeof PatchPipeRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cipp-pipe-relining': {
+      id: '/cipp-pipe-relining'
+      path: '/cipp-pipe-relining'
+      fullPath: '/cipp-pipe-relining'
+      preLoaderRoute: typeof CippPipeReliningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/knowledge/': {
