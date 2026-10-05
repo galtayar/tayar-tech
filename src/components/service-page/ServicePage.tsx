@@ -38,6 +38,7 @@ export type Section = {
   bullets?: string[];
   steps?: string[];
   subsections?: { h3: string; text: string }[];
+  areas?: boolean;
 };
 
 export type ServicePageData = {
@@ -86,7 +87,11 @@ export function buildServiceHead(d: ServicePageData) {
               url,
               inLanguage: "he-IL",
               provider: { "@id": absoluteUrl("/#localbusiness") },
-              areaServed: SERVICE_AREAS.map((n) => ({ "@type": "City", name: n })),
+              areaServed: [
+                { "@type": "AdministrativeArea", name: "אזור המרכז" },
+                { "@type": "AdministrativeArea", name: "גוש דן" },
+                ...SERVICE_AREAS.map((n) => ({ "@type": "City", name: n })),
+              ],
             },
             {
               "@type": "BreadcrumbList",
@@ -212,6 +217,16 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                     <p className="text-muted-foreground leading-relaxed">{sub.text}</p>
                   </div>
                 ))}
+                {s.areas && (
+                  <ul className="flex flex-wrap gap-2 mt-5">
+                    {SERVICE_AREAS.map((a) => (
+                      <li key={a} className="inline-flex items-center gap-1 text-sm bg-muted text-foreground px-3 py-1.5 rounded-full">
+                        <MapPin className="w-3.5 h-3.5 text-primary" aria-hidden="true" /> {a}
+                      </li>
+                    ))}
+                    <li className="text-sm text-muted-foreground px-3 py-1.5">והסביבה</li>
+                  </ul>
+                )}
               </section>
               {data.methodsAfter === i && <RelatedCards items={related} heading="שיטות תיקון ושיקום הצנרת שלנו" />}
             </div>
@@ -284,7 +299,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               ))}
             </ul>
           </nav>
-          <p className="text-muted-foreground">© {new Date().getFullYear()} TAYAR TECH — טייאר טכנולוגיות צנרת</p>
+          <div className="text-muted-foreground space-y-1"><p>TAYAR TECH מספקת שירותי תיקון ושיקום צנרת ללא הרס באזור המרכז וגוש דן.</p><p>© {new Date().getFullYear()} TAYAR TECH | טכנולוגיות צנרת מתקדמות — מבית טייאר אינסטלציה ושירותי ביובית</p></div>
         </div>
       </footer>
 
