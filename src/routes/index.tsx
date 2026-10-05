@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { absoluteUrl } from "@/lib/seo";
 import {
   Phone,
@@ -681,12 +681,13 @@ function WhyUs() {
 
 /* ---------- Services ---------- */
 function Services() {
-  const services = [
-    { icon: ShieldCheck, title: "שיקום צנרת ללא הרס", text: "שיקום פנימי מלא של מערכת הצנרת — בלי לשבור קירות, רצפות או ריצוף." },
-    { icon: Wrench, title: "תיקון צנרת ללא חפירה", text: "פתרון מהיר ומדויק לתיקון צנרת מים וביוב — ללא חפירות בחצר או ברחוב." },
-    { icon: Sparkles, title: "תיקוני פאץ׳", text: "טיפול נקודתי בסדקים, נזילות וקטעים פגומים בצנרת קיימת." },
-    { icon: Layers, title: "שיקום בשיטת שרוול (CIPP)", text: "שרוול אפוקסי פנימי שיוצר ׳צינור בתוך צינור׳ עמיד לעשרות שנים." },
-    { icon: Camera, title: "צילום קווי ביוב", text: "מצלמות רובוטיות ו-360° לאיתור סתימות, שברים, שורשים ומפגעים." },
+  type Svc = { icon: typeof Phone; title: string; text: string; to?: "/tikkun-tzaneret-lelo-heres" | "/patch-pipe-repair" | "/cipp-pipe-relining" | "/sewer-camera-inspection" };
+  const services: Svc[] = [
+    { icon: ShieldCheck, title: "שיקום צנרת ללא הרס", text: "שיקום פנימי מלא של מערכת הצנרת — בלי לשבור קירות, רצפות או ריצוף.", to: "/tikkun-tzaneret-lelo-heres" },
+    { icon: Wrench, title: "תיקון צנרת ללא חפירה", text: "פתרון מהיר ומדויק לתיקון צנרת מים וביוב — ללא חפירות בחצר או ברחוב.", to: "/tikkun-tzaneret-lelo-heres" },
+    { icon: Sparkles, title: "תיקוני פאץ׳", text: "טיפול נקודתי בסדקים, נזילות וקטעים פגומים בצנרת קיימת.", to: "/patch-pipe-repair" },
+    { icon: Layers, title: "שיקום בשיטת שרוול (CIPP)", text: "שרוול אפוקסי פנימי שיוצר ׳צינור בתוך צינור׳ עמיד לעשרות שנים.", to: "/cipp-pipe-relining" },
+    { icon: Camera, title: "צילום קווי ביוב", text: "מצלמות רובוטיות ו-360° לאיתור סתימות, שברים, שורשים ומפגעים.", to: "/sewer-camera-inspection" },
     { icon: Waves, title: "שטיפת קווי ביוב", text: "שטיפה בלחץ גבוה (ג׳טינג) להסרת שומנים, אבנית וסתימות עיקשות." },
     { icon: Building2, title: "פתרונות לבניינים משותפים", text: "שיקום צנרת לבניינים וועדי בתים — ביצוע מסודר עם תיאום מלא מול הדיירים." },
     { icon: Droplets, title: "פתרונות לחברות ניהול", text: "הסכמי שירות, אחזקה תקופתית ופרויקטים מקיפים לחברות ניהול נכסים." },
@@ -713,6 +714,15 @@ function Services() {
                 </div>
                 <h3 className="font-bold text-lg mb-2 leading-snug">{s.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{s.text}</p>
+                {s.to && (
+                  <Link
+                    to={s.to}
+                    className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-primary hover:underline underline-offset-4"
+                    aria-label={`למידע נוסף על ${s.title}`}
+                  >
+                    למידע נוסף ←
+                  </Link>
+                )}
               </div>
             </article>
           ))}
