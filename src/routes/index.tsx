@@ -256,6 +256,7 @@ function HomePage() {
         <Clients />
         <Testimonials />
         <ServiceAreas />
+        <KnowledgeTeaser />
         <FAQ />
         <CTA />
       </main>
@@ -881,6 +882,40 @@ function ServiceAreas() {
   );
 }
 
+/* ---------- Knowledge teaser ---------- */
+function KnowledgeTeaser() {
+  const items = [
+    { slug: "pipe-repair-without-breaking", title: "תיקון צנרת ללא הרס – מתי אפשר לתקן בלי לשבור?" },
+    { slug: "broken-pipe-under-floor", title: "שבר בצינור מתחת לריצוף – האם חייבים לשבור?" },
+    { slug: "sewer-camera-inspection-guide", title: "צילום קווי ביוב – איך זה עובד ומה אפשר לגלות?" },
+  ];
+  return (
+    <section id="knowledge" className="py-16 lg:py-20 bg-muted/40">
+      <div className="container-section">
+        <h2 className="text-2xl lg:text-3xl font-extrabold text-center mb-8">מהידע של TAYAR TECH</h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          {items.map((a) => (
+            <Link
+              key={a.slug}
+              to="/knowledge/$slug"
+              params={{ slug: a.slug }}
+              className="bg-card border border-border rounded-2xl p-5 hover:shadow-elegant hover:-translate-y-1 transition-all"
+            >
+              <h3 className="font-bold leading-snug mb-3">{a.title}</h3>
+              <span className="text-sm font-semibold text-primary">לקריאת המאמר ←</span>
+            </Link>
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <Link to="/knowledge" className="inline-flex items-center gap-2 border border-primary text-primary px-5 py-2.5 rounded-xl font-semibold hover:bg-primary hover:text-primary-foreground transition-colors min-h-11">
+            לכל המאמרים
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- Process ---------- */
 function Process() {
   const steps = [
@@ -1137,6 +1172,9 @@ function Footer() {
           <p className="text-muted-foreground leading-relaxed">
             TAYAR TECH מספקת שירותי תיקון ושיקום צנרת ללא הרס באזור המרכז וגוש דן.
           </p>
+          <Link to="/knowledge" className="inline-block mt-3 text-primary font-semibold hover:underline underline-offset-4">
+            מרכז ידע
+          </Link>
         </div>
       </div>
       <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">

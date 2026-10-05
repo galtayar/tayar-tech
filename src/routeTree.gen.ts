@@ -14,6 +14,8 @@ import { Route as SewerCameraInspectionRouteImport } from './routes/sewer-camera
 import { Route as PatchPipeRepairRouteImport } from './routes/patch-pipe-repair'
 import { Route as CippPipeReliningRouteImport } from './routes/cipp-pipe-relining'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KnowledgeIndexRouteImport } from './routes/knowledge.index'
+import { Route as KnowledgeSlugRouteImport } from './routes/knowledge.$slug'
 
 const TikkunTzaneretLeloHeresRoute = TikkunTzaneretLeloHeresRouteImport.update({
   id: '/tikkun-tzaneret-lelo-heres',
@@ -40,6 +42,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KnowledgeIndexRoute = KnowledgeIndexRouteImport.update({
+  id: '/knowledge/',
+  path: '/knowledge/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeSlugRoute = KnowledgeSlugRouteImport.update({
+  id: '/knowledge/$slug',
+  path: '/knowledge/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +59,8 @@ export interface FileRoutesByFullPath {
   '/patch-pipe-repair': typeof PatchPipeRepairRoute
   '/sewer-camera-inspection': typeof SewerCameraInspectionRoute
   '/tikkun-tzaneret-lelo-heres': typeof TikkunTzaneretLeloHeresRoute
+  '/knowledge/$slug': typeof KnowledgeSlugRoute
+  '/knowledge/': typeof KnowledgeIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +68,8 @@ export interface FileRoutesByTo {
   '/patch-pipe-repair': typeof PatchPipeRepairRoute
   '/sewer-camera-inspection': typeof SewerCameraInspectionRoute
   '/tikkun-tzaneret-lelo-heres': typeof TikkunTzaneretLeloHeresRoute
+  '/knowledge/$slug': typeof KnowledgeSlugRoute
+  '/knowledge': typeof KnowledgeIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,6 +78,8 @@ export interface FileRoutesById {
   '/patch-pipe-repair': typeof PatchPipeRepairRoute
   '/sewer-camera-inspection': typeof SewerCameraInspectionRoute
   '/tikkun-tzaneret-lelo-heres': typeof TikkunTzaneretLeloHeresRoute
+  '/knowledge/$slug': typeof KnowledgeSlugRoute
+  '/knowledge/': typeof KnowledgeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -71,6 +89,8 @@ export interface FileRouteTypes {
     | '/patch-pipe-repair'
     | '/sewer-camera-inspection'
     | '/tikkun-tzaneret-lelo-heres'
+    | '/knowledge/$slug'
+    | '/knowledge/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -78,6 +98,8 @@ export interface FileRouteTypes {
     | '/patch-pipe-repair'
     | '/sewer-camera-inspection'
     | '/tikkun-tzaneret-lelo-heres'
+    | '/knowledge/$slug'
+    | '/knowledge'
   id:
     | '__root__'
     | '/'
@@ -85,6 +107,8 @@ export interface FileRouteTypes {
     | '/patch-pipe-repair'
     | '/sewer-camera-inspection'
     | '/tikkun-tzaneret-lelo-heres'
+    | '/knowledge/$slug'
+    | '/knowledge/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -93,6 +117,8 @@ export interface RootRouteChildren {
   PatchPipeRepairRoute: typeof PatchPipeRepairRoute
   SewerCameraInspectionRoute: typeof SewerCameraInspectionRoute
   TikkunTzaneretLeloHeresRoute: typeof TikkunTzaneretLeloHeresRoute
+  KnowledgeSlugRoute: typeof KnowledgeSlugRoute
+  KnowledgeIndexRoute: typeof KnowledgeIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -132,6 +158,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/knowledge/': {
+      id: '/knowledge/'
+      path: '/knowledge'
+      fullPath: '/knowledge/'
+      preLoaderRoute: typeof KnowledgeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/$slug': {
+      id: '/knowledge/$slug'
+      path: '/knowledge/$slug'
+      fullPath: '/knowledge/$slug'
+      preLoaderRoute: typeof KnowledgeSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -141,6 +181,8 @@ const rootRouteChildren: RootRouteChildren = {
   PatchPipeRepairRoute: PatchPipeRepairRoute,
   SewerCameraInspectionRoute: SewerCameraInspectionRoute,
   TikkunTzaneretLeloHeresRoute: TikkunTzaneretLeloHeresRoute,
+  KnowledgeSlugRoute: KnowledgeSlugRoute,
+  KnowledgeIndexRoute: KnowledgeIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
